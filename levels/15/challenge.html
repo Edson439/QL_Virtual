@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenge Game</title>
+	
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .screen {
+      display: none;
+      text-align: center;
+      padding: 00px;
+    }
+
+    .active {
+      display: block;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+	  color: #007bff;
+    }
+	  h2 {
+	  margin-top: 0;
+      margin-bottom: -10px;
+	  color: #007bff;
+	  font-size: 36px;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+	button:hover {
+	  background-color: #1976d2;
+	  transform: scale(1.05);
+	  transition: all 0.3s ease;
+	}
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .options img {
+      width: 90%;
+	  max-width: 400px;
+      height: auto;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .options img:hover {
+      transform: scale(1.05);
+      border-color: #2196f3;
+    }
+
+    .score {
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .audio-btn {
+      background: #007bff;
+      margin-bottom: 0px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+
+    .audio-btn i {
+      font-size: 24px;
+      color: white;
+    }
+	  
+	.instructions {
+	  font-size: 14px;
+	  margin-bottom: 10px;
+	  color: #333;
+	}
+
+	.progress-container {
+	  width: 90%;
+	  background-color: #e0e0e0;
+	  height: 10px;
+	  border-radius: 20px;
+	  margin: 10px auto;
+	  overflow: hidden;
+	}
+
+	#progressBar {
+	  height: 100%;
+	  width: 0%;
+	  background-color: #007bff;
+	  transition: width 0.4s ease;
+	}
+
+	.progress-count {
+	  font-size: 14px;
+	  margin-bottom: 10px;
+	  color: #333;
+	}
+@media (max-width: 768px) {
+  .options {
+    gap: 8px;
+  }
+
+  .options img {
+    max-width: 300px;
+    width: 95%;
+    border-radius: 10px;
+  }
+}
+	  
+@media (max-width: 660px) {
+  .options {
+    gap: 8px;
+  }
+
+  .options img {
+    max-width: 200px;
+    width: 95%;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .options img {
+    width: 90%;
+    border-radius: 8px;
+  }
+
+  button {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+
+  .audio-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .audio-btn i {
+    font-size: 20px;
+  }
+}
+
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Instrucciones -->
+  <div id="startScreen" class="screen active">
+	<h2>😃</h2>
+    <h1>Bienvenid@ al reto de hoy</h1>
+    <p>Escucha el audio y selecciona la imagen correcta.</p>
+    <button onclick="startGame()">Comenzar</button>
+  </div>
+
+  <!-- Pregunta -->
+  <div id="questionScreen" class="screen">
+	<div class="instructions">
+	  Dale clic a la bocina 🔊, escucha con atención… ¡y elige la imagen que mejor representa la oración! 💪✨
+	</div>
+	<div class="progress-container">
+	  <div id="progressBar"></div>
+	</div>
+	<div class="progress-count">
+	  <span id="progressText">1/10</span>
+	</div>
+    <button class="audio-btn" onclick="playAudio()">
+      <i class="fas fa-volume-up"></i>
+    </button>
+    <div class="options" id="optionsContainer"></div>
+  </div>
+
+  <!-- Resultado -->
+	<div id="endScreen" class="screen">
+	  <h1>¡Reto Terminado!</h1>
+	  <div class="score">Tu puntuación: <span id="finalScore"></span>/10</div>
+		<div id="resultMessage" style="margin: 15px 0 30px 0; font-size: 16px;"></div>
+	  <button onclick="restartGame()">Inténtalo de nuevo</button>
+	</div>
+
+	
+  <script>
+    const totalQuestions = 10;
+    let currentQuestion = 1;
+    let score = 0;
+	let wasWrongBefore = false;
+	  
+    const correctAnswers = [0, 0, 3, 0, 0, 0, 3, 0, 0, 0]; // índice de la opción correcta por pregunta
+    const startScreen = document.getElementById('startScreen');
+    const questionScreen = document.getElementById('questionScreen');
+    const endScreen = document.getElementById('endScreen');
+    const questionNumber = document.getElementById('questionNumber');
+    const finalScore = document.getElementById('finalScore');
+    const optionsContainer = document.getElementById('optionsContainer');
+
+    function startGame() {
+      currentQuestion = 1;
+      score = 0;
+      startScreen.classList.remove('active');
+      endScreen.classList.remove('active');
+      questionScreen.classList.add('active');
+      showQuestion();
+    }
+
+    function showQuestion() {
+  	wasWrongBefore = false;
+	document.getElementById("progressText").textContent = `${currentQuestion}/${totalQuestions}`;
+
+	const progressPercent = (currentQuestion / totalQuestions) * 100;
+	document.getElementById("progressBar").style.width = `${progressPercent}%`;
+      optionsContainer.innerHTML = '';
+
+      const qIndex = currentQuestion;
+      for (let i = 1; i <= 4; i++) {
+        const wrapper = document.createElement('div');
+		wrapper.style.position = 'relative';
+		wrapper.style.display = 'inline-block';
+
+		const img = document.createElement('img');
+		img.src = `challenge/img/c${qIndex}/0${i}.png`;
+		img.alt = `Opción ${i}`;
+		img.onclick = () => selectOption(i - 1);
+
+		wrapper.appendChild(img);
+		optionsContainer.appendChild(wrapper);
+      }
+    }
+
+function playAudio() {
+  console.log(`Reproduciendo: challenge/img/c${currentQuestion}/01.mp3`);
+  const audio = new Audio(`challenge/img/c${currentQuestion}/01.mp3`);
+  audio.play();
+}
+
+function selectOption(index) {
+  const correctIndex = correctAnswers[currentQuestion - 1];
+  const allOptions = document.querySelectorAll('#optionsContainer img');
+	
+  // Limpiar estado anterior
+  allOptions.forEach(img => {
+    img.style.pointerEvents = 'auto';
+    img.style.filter = 'none';
+    img.style.borderColor = 'transparent';
+    const label = img.parentElement.querySelector('.feedback-label');
+    if (label) label.remove();
+  });
+
+  // ✅ RESPUESTA CORRECTA
+	if (index === correctIndex) {
+	  if (!wasWrongBefore) {
+		score++; // ✅ solo si fue a la primera
+	  }
+    const sound = new Audio('challenge/sounds/correct.mp3');
+    sound.play();
+
+    allOptions.forEach((img, i) => {
+      img.style.pointerEvents = 'none';
+
+      if (i === correctIndex) {
+        img.style.borderColor = 'green';
+        img.style.filter = 'brightness(90%)';
+
+        const label = document.createElement('div');
+        label.className = 'feedback-label';
+		const emojis = ["🌟", "🎉", "🥳", "👏", "💪", "🤩"];
+		const messages = ["¡Perfecto!", "¡Muy bien!", "¡Lo lograste!", "¡Excelente!", "¡Increíble!", "¡Buen trabajo!"];
+		const randomIndex = Math.floor(Math.random() * emojis.length);
+
+		label.innerHTML = `<div style="font-size: 36px; line-height: 1;">${emojis[randomIndex]}</div>
+						   <div style="font-size: 16px; font-weight: bold;">${messages[randomIndex]}</div>`;
+
+        label.style.position = 'absolute';
+        label.style.top = '50%';
+        label.style.left = '50%';
+        label.style.transform = 'translate(-50%, -50%)';
+        label.style.color = 'white';
+        label.style.textAlign = 'center';
+        label.style.padding = '6px 12px';
+        label.style.borderRadius = '12px';
+   
+        img.parentElement.style.position = 'relative';
+        img.parentElement.appendChild(label);
+      } else {
+        img.style.filter = 'brightness(30%)';
+      }
+    });
+	  
+    // Esperar 3 segundos antes de pasar a la siguiente
+    setTimeout(() => {
+      currentQuestion++;
+
+      if (currentQuestion > totalQuestions) {
+        questionScreen.classList.remove('active');
+        endScreen.classList.add('active');
+        finalScore.textContent = score;
+
+        // Confetti
+        confetti({ particleCount: 150, spread: 100, origin: { y: 0.6 } });
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+          }, i * 400);
+        }
+
+        // Mensaje personalizado
+        let message = '';
+        if (score === 10) {
+          message = "🌟 ¡Perfecto! ¡Eres un maestro del desafío!";
+        } else if (score >= 8) {
+          message = "🎉 ¡Muy bien! Estás en gran forma.";
+        } else if (score >= 5) {
+          message = "👍 ¡Buen intento! Puedes hacerlo aún mejor.";
+        } else {
+          message = "😅 ¡No te desanimes! Sigue practicando.";
+        }
+
+        document.getElementById('resultMessage').textContent = message;
+
+        // Música de victoria
+        const victoryMusic = new Audio('challenge/sounds/victory.mp3');
+        victoryMusic.play();
+
+      } else {
+        showQuestion();
+      }
+    }, 3000);
+
+  } else {
+	 wasWrongBefore = true;
+    // ❌ Incorrecta
+    const wrong = new Audio('challenge/sounds/wrong.mp3');
+    wrong.play();
+
+    allOptions.forEach((img, i) => {
+      img.style.pointerEvents = 'none';
+
+      if (i === index) {
+        img.style.borderColor = 'red';
+        img.style.filter = 'brightness(70%)';
+
+        // Mensaje Oops en la opción equivocada
+		// Mensajes aleatorios de error
+		const errorEmojis = ["😅", "😬", "😕", "🤔", "😣", "😰"];
+		const errorMessages = [
+		  "Uy no… vuelve a intentarlo",
+		  "Casi…",
+		  "No te rindas",
+		  "Intenta otra vez",
+		  "¡Tú puedes!",
+		  "Oops! Inténtalo de nuevo"
+		];
+		const errorIndex = Math.floor(Math.random() * errorEmojis.length);
+
+		const label = document.createElement('div');
+		label.className = 'feedback-label';
+		label.innerHTML = `<div style="font-size: 36px; line-height: 1;">${errorEmojis[errorIndex]}</div>
+						   <div style="font-size: 12px; font-weight: bold;">${errorMessages[errorIndex]}</div>`;
+
+
+		label.style.position = 'absolute';
+		label.style.top = '50%';
+		label.style.left = '50%';
+		label.style.transform = 'translate(-50%, -50%)';
+		label.style.color = 'white';
+		label.style.textAlign = 'center';
+		label.style.padding = '6px 12px';
+
+		img.parentElement.style.position = 'relative';
+		img.parentElement.appendChild(label);
+
+      } else {
+        img.style.filter = 'brightness(30%)';
+      }
+    });
+
+    // ⏳ Esperar 3 segundos, luego reactivar
+    setTimeout(() => {
+      allOptions.forEach((img, i) => {
+        img.style.pointerEvents = 'auto';
+        img.style.filter = 'none';
+        img.style.borderColor = 'transparent';
+        const label = img.parentElement.querySelector('.feedback-label');
+        if (label) label.remove();
+      });
+    }, 3000);
+  }
+}
+
+    function restartGame() {
+      startGame();
+    }
+	 
+  </script>
+	<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+</body>
+</html>

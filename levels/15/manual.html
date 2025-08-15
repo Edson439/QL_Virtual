@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1, Lesson 15</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+			margin: 60px 10px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+		.header-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 40px; /* Ajusta según sea necesario */
+			background-color: #1e3a8a; /* Azul oscuro */
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			z-index: 1000;
+		}
+
+		.header-bar img {
+			height: 20px; /* Ajusta el tamaño del logo */
+		}
+
+		.header-bar .header-text {
+			color: white;
+			font-size: 14px;
+		}
+
+        .wrapper {
+			margin: 60px;
+            background: #fff;
+            padding: 5px 30px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px; /*Medida de contenedor ancho*/
+        }
+		.container {
+			width: 100%;
+			min-height: 2020px; /*Medida de contenedor alto*/
+			position: relative;
+			overflow-x: hidden;
+			max-width: 1140px;
+		}
+        .content {
+			width: 1200px;
+			max-width: 1140px;
+            padding: 10px 0;
+        }
+		.content-box {
+			position: absolute;
+			transition: 0.3s ease;
+			display: flex;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+		h1, h2 {
+			color: #293a7b;
+		}		
+		h3{
+			color: #293a7b;
+			font-size: 15px;
+		}
+		p {
+			color: #595959;
+		}
+        input[type="radio"] {
+            display: none;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            padding: 20px 0;
+			font-size: 16px;
+        }
+        nav::after {
+            position: absolute;
+            content: "";
+            background: #e7e7e7;
+            width: 100%;
+            height: 1px;
+            top: 62px;
+            z-index: 0;
+        }
+        nav::before {
+            position: absolute;
+            content: "";
+            background: #293a7b;
+            width: 16.66%;
+            height: 5px;
+            top: 58px;
+            left: 0;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+            transition: 0.3s;
+        }
+        nav label {
+            position: relative;
+            cursor: pointer;
+            width: 20%;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 500;
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+		nav label i {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        nav label::after {
+            position: absolute;
+            content: "";
+            background: #89acd9;
+            display: block;
+            padding-top: 200%;
+            padding-left: 350%;
+            margin-top: -100%;
+            opacity: 0;
+            transition: all 0.9s;
+        }
+        nav label:active::after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+
+		#steps:checked ~ nav::before { left: 0; }
+        #warm:checked ~ nav::before { left: 16.66%; }
+        #seg1:checked ~ nav::before { left: 33.33%; }
+        #seg2:checked ~ nav::before { left: 49.99%; }
+        #seg3:checked ~ nav::before { left: 66.66%; }
+        #ext:checked ~ nav::before { left: 83.32%; }
+
+        #steps:checked ~ .container .content-box { left: 0; }
+        #warm:checked ~ .container .content-box { left: -100%; }
+        #seg1:checked ~ .container .content-box { left: -200%; }
+        #seg2:checked ~ .container .content-box { left: -300%; }
+        #seg3:checked ~ .container .content-box { left: -400%; }
+        #ext:checked ~ .container .content-box { left: -500%; }
+
+        #steps:checked ~ nav label:nth-child(1),
+        #warm:checked ~ nav label:nth-child(2),
+        #seg1:checked ~ nav label:nth-child(3),
+        #seg2:checked ~ nav label:nth-child(4),
+        #seg3:checked ~ nav label:nth-child(5) 
+        #ext:checked ~ nav label:nth-child(6) {
+            color: #293a7b;
+        }
+        ::selection {
+            background: #293a7b;
+            color: #fff;
+        }
+        .accordion {
+            display: flex;
+			max-width: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 0px 0px;
+        }
+        .accordion .accordion-text {
+            width: 100%;
+        }
+        .accordion .accordion-text .title {
+            font-size: 35px;
+            font-weight: 500;
+            color: #065fd4;
+        }
+        .accordion .accordion-text .faq-text {
+            margin-top: 25px;
+            min-height: 500px;
+            overflow-y: auto;
+        }
+        .faq-text::-webkit-scrollbar {
+            display: none;
+        }
+        .accordion .accordion-text li {
+            list-style: none;
+            cursor: pointer;
+        }
+        .accordion-text li .question-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .accordion-text li .question-arrow .question {
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li .question-arrow .arrow {
+            font-size: 20px;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            transform: rotate(-180deg);
+        }
+        .accordion-text li:hover .question-arrow .question,
+        .accordion-text li:hover .question-arrow .arrow {
+            color: #065fd4;
+        }
+        .accordion-text li.showAnswer .question-arrow .question,
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            color: #065fd4;
+        }
+      	.accordion-text li .line {
+            display: block;
+            height: 1px;
+            width: 100%;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .accordion-text li p {
+            width: 92%;
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            display: none;
+			margin-bottom: 20px;
+			padding: 0 0 10px 20px;
+        }
+        .accordion-text li.showAnswer p {
+            display: block;
+        }
+		.steps-list {
+			list-style-type: decimal;
+			padding-left: 20px;
+		}
+		.steps-list li {
+			margin-bottom: 0px;
+		}
+		.steps-list p {
+			margin: 0;
+			padding-left: 20px;
+			font-size: 15px;
+			font-weight: 500;
+			color: #595959;
+			text-indent: -20px;
+		}
+		.indented-paragraph {
+			text-indent: 0px;
+			margin-left: 20px;
+			margin-right: 0;
+		} 
+		table {
+            width: 98%;
+            max-width: 1000px;
+			margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #293a7b;
+            font-size: 18px;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #293a7b;
+        }
+
+        /* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario td:nth-child(2) {
+            width: 30%; /* Ajustar ancho de la segunda columna */
+        }
+        .tabla-vocabulario td:nth-child(3) {
+            width: 55%; /* Ajustar ancho de la tercera columna */
+        }
+		.tabla-vocabulario4{
+			max-width: 300px;
+			margin: 10px; /* elimina cualquier centrado automático */
+    		float: left;
+		}
+
+		/* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario2 td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario2 td:nth-child(2) {
+            width: 85%; /* Ajustar ancho de la segunda columna */
+        }
+		i.fas.fa-image {
+			font-size: 1em; /* Mantener el tamaño del icono igual que el tamaño del texto */
+			vertical-align: middle; /* Alinear el icono con el texto */
+			margin-right: 5px; /* Añadir un pequeño margen a la derecha del icono */
+			color: #0174b1;
+		}
+		.example-image {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+			max-width: 1000px;
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+		/* Estilos de Accordion */
+        .accordion2 {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+			color: #595959;	
+        }
+        .accordion-item2 {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;z
+			text-decoration: none; /* Elimina el subrayado del texto */
+			border: none; /* Asegúrate de que no haya bordes */
+        }
+        .accordion-header2 {
+            background-color: #e9f8ff;
+            color: #293a7b;
+            cursor: pointer;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .accordion-content2 {
+            display: none;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .accordion-header2 i {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active2 i {
+            transform: rotate(180deg);
+        }
+		.header-container {
+		  display: flex; /* Hace que los hijos del contenedor se alineen en una fila */
+		  justify-content: space-between;
+		  align-items: center;
+		  width: 100%;
+		  margin: 20px 0;
+		}
+		.header-container h1 {
+		  margin: 0px; /* Elimina márgenes predeterminados */
+		  padding: 0; /* Elimina rellenos predeterminados */
+		}
+		  .iconcc {
+            height: 24px;
+        }
+		.highlight2 {
+            position: relative;
+            top: -6px; /* Ajusta este valor para subir o bajar el texto */
+        }
+
+        /* Media Queries for Responsiveness */
+		@media (max-width: 1260px) {
+				body {
+					margin: 20px 10px;
+				}
+				.wrapper {
+					max-width: 960px; /*Medida de contenedor*/
+				}
+				nav {
+					font-size: 16px;
+				}
+				.container {
+					max-width: 900px;
+					width: 960px;
+				}
+				.content {
+					max-width: 900px;
+					width: 960px;
+				}
+				.accordion2 {
+					max-width: 960px;
+			  }
+				td {
+					font-size: 14px;
+				}
+			}
+        @media (max-width: 1024px) {
+			body {
+				margin: 20px 10px;
+			}
+			
+			.wrapper {
+				max-width: 840px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 780px;
+				width: 840px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 780px;
+				width: 840px;
+			}
+			.accordion2 {
+				max-width: 780px;
+      	 	}
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			/* Ajustes para mantener el indicador de navegación */
+			#steps:checked ~ nav::before {
+				left:0;
+				top: 18%; /* Ajusta el valor para que se alinee correctamente con el item activo */
+			}
+			#warm:checked ~ nav::before {
+				left:0;
+				top: 34%;
+			}
+			#seg1:checked ~ nav::before {
+				left:0;
+				top: 49%;
+			}
+			#seg2:checked ~ nav::before {
+				left:0;
+				top: 65%;
+			}
+			#seg3:checked ~ nav::before {
+				left:0;
+				top: 80%;
+			}
+			#ext:checked ~ nav::before {
+				left:0;
+				top: 96%;
+			}
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 900px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            height: 20px;
+      		  }
+			.wrapper {
+				max-width: 720px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 660px;
+				width: 720px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 660px;
+				width: 720px;
+			}
+			.accordion2 {
+				max-width: 720px;
+      	  }
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 768px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            	 height: 15px;
+			 }
+			h1 {
+				font-size: 20px;
+			}		
+			.wrapper {
+				max-width: 520px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 460px;
+				width: 520px;
+				
+			}
+			.content {
+				max-width: 460px;
+				width: 520px;
+			}
+			.accordion2 {
+				max-width: 520px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 576px) {
+			body {
+				margin: 20px 10px;
+			}
+			.wrapper {
+				max-width: 468px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 420px;
+				width: 468px;
+			}
+			.content {
+				max-width: 420px;
+				width: 468px;
+			}
+			.accordion2 {
+				max-width: 468px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 480px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+           	 height: 8px;
+      		}
+
+			.wrapper {
+				max-width: 330px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 290px;
+				width: 330px;
+			}
+			.content {
+				max-width: 290px;
+				width: 330px;
+			}
+			.accordion2 {
+				max-width: 330px;
+      	    }
+			table {
+            width: 100%;
+            max-width: 100px;
+       	 	}
+			td {
+				font-size: 10px;
+			}
+			th {
+				font-size: 12px;
+			}
+			td {
+				font-size: 10px;
+			}
+        }
+	</style>
+</head>
+
+<body>
+	<div class="header-bar">
+		<img src="images/Virtual_-01-02.png" alt="Logo"> <!-- Reemplaza con la ruta del logo -->
+		<span class="header-text">Manuals <span style="font-size: 10px">▼</span></span>
+	</div>
+	<div class="wrapper">
+		<div class="header-container">
+  			<h1>LESSON 15 > Expresa emociones comunes.</h1>
+		</div>
+        <input type="radio" name="slider" id="steps" checked>
+        <input type="radio" name="slider" id="warm">
+        <input type="radio" name="slider" id="seg1">
+        <input type="radio" name="slider" id="seg2">
+        <input type="radio" name="slider" id="seg3">
+        <input type="radio" name="slider" id="ext">
+        <nav>
+            <label for="steps" class="steps">STEPS OF THE METHOD</label>
+            <label for="warm" class="warm">WARM UP</label>
+            <label for="seg1" class="seg1">DIALOGUE</label>
+            <label for="seg2" class="seg2">VOCABULARY</label>
+            <label for="seg3" class="seg3">PRACTICE</label>
+            <label for="ext" class="ext">EXTRA ACTIVITIES</label>
+        </nav>
+        <div class="container">
+            <div class="content-box">
+				<!-- Steps of the method -->
+                <div class="content">
+                    <h2>Steps of the method</h2>
+                    <div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Class routine</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p><b>a. Give a brief explanation of the Educational Objective in Spanish. </b></p>
+                                    <p>Make sure you clearly explain the objective and the skills students are expected to develop in the lesson. This shouldn't take more than a few seconds.</p>
+                                </li>                               
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Play the video of the lesson.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Have students watch the video of the new lesson and encourage them to pay close attention so they can visualize the objectives they need to reach. </p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Introduce the new vocabulary and/or structures.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+										<ol class="steps-list">
+											<li>
+												<p>a. Select one student and have him/her join the sounds aloud as you gradually show them on the screen. Do not say the sounds. Finally, have the student say the word at least twice.</p>
+											</li>
+											<li>
+												<p>b. Explain the word using perception and production (using props, images, drawings, and/or acting) to teach vocabulary in a faster and easier way. The way you teach the word is the way you can trigger it later. Make sure the students understand the word.</p>
+											</li>
+											<li>
+												<p>c. Have one student demonstrate his/her understanding of the new word/expression by either asking the student for an example; using the new word in a sentence; providing a question or indication that guides the student to an example; or involving the student in a short situation where he/she demonstrates the correct usage of the new vocabulary. For example: <i>Watch out for…!</i> You may call on a second student if you consider the word/expression requires further practice for better understanding.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with the rest of the words. Make sure you select a different student for each word.</p>
+											</li>
+										</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Play the video again.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<p>Play the video and encourage students to identify the new words or structures as they are used in the context of the story.</p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 4. Repetition</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Play the first line of the segment.</p>
+										</li>
+										<li>
+											<p>b. Reproduce the line just played while acting it out. Use 2 or 3 meaningful gestures per line.</p>
+										</li>
+										<li>
+											<p>c. Select one student and have him/her meaningfully reproduce the line acting it out. Follow the correction process.</p>
+										</li>
+										<li>
+											<p>d. Have two more students, one at a time, meaningfully reproduce the line acting it out. Follow the correction process. Make sure students participate evenly throughout the lesson.</p>
+										</li>
+										<li>
+											<p>e. Continue with each line in the above manner until all the content has been covered.</p>
+										</li>
+									</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 5. Play the video again. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<p>This is done so that students can organize and integrate all the ideas they have just learned and produced.</p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 6. Practice</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p>Each lesson has a different practice activity, and different procedure. Check the corresponding lesson to learn the correct procedure for the activity.</p>
+                                </li>
+
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 7. Role-plays</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p>Have all students participate in various activities to achieve the objective of the lesson and apply their skills in a real-life context. Select two or three students at a time and have them get involved in either a role-play or a question/answer activity. All students must speak, regardless of how much they say.</p>
+									<p>This is your opportunity to get students involved in different scenarios where they will be able to communicate ideas similar to those in the lesson, but using their own personal characteristics. Make sure they understand the objective and use the new words and structures learned in the lesson. See the role-plays or activities suggested in the "Ideas for real-life practice” section for this step as part of your class preparation.</p>  
+
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 8. Review the new vocabulary and structures contained in the lesson. </span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p>Check the students’ understanding of all the new words and structures, as well as their pronunciation by saying the same word trigger you used when you introduced the vocabulary, and by having one student at a time respond out loud to your trigger providing the right word or expression. In case they don’t know, or mispronounce the item, help them reinforce the information by using the Color Chart.</p>
+									<p>This step helps students reinforce criteria and refresh their memory. It is the right moment to reinforce the contents of the lesson with students who had trouble role-playing or asking/answering questions. Props, images, mimics, and drawings may help you, too.</p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 9. Play the video of the lesson.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p>Play the video to give closure to the lesson and confirm students’ comprehension.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- Warm up -->
+                <div class="content">
+                    <h2>Warm up</h2><br>
+					<p>Sounds: <img src="CC/CC-23.png" alt="Image 23" class="iconcc"  style="margin-bottom: -7px"></p>
+					<!-- Acordeón para la sección de Dialogue -->
+					<div class="accordion2">
+						<!-- Acordeón para la sección de Vocabulary and expressions -->
+						<br><h3>Words:</h3><br>
+						<table class="tabla-vocabulario4">
+							<tr>
+								<td><img src="CC/CC-23.png" alt="Image 23" class="iconcc"></td>
+								<td>Europe</td>
+								<td><img src="CC/CC-23.png" alt="Image 23" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"> <img src="CC/CC-06.png" alt="Image 06" class="iconcc"> <img src="CC/CC-24.png" alt="Image 24" class="iconcc"></td>
+							</tr>
+						</table>
+					</div>
+                </div>
+				<!-- Dialogue -->
+                <div class="content">
+                    <h2>Dialogue</h2><br>
+					<!-- Acordeón para la sección de Dialogue -->
+					<p><span class="highlight">Learning goals:</span> Verb to be + emotions</p><br>					
+					<table>
+						 <tr>
+						  <th>Person</th>
+						  <th>Dialogue</th>
+						  <th>Suggested triggers</th>
+						 </tr>
+						 <tr>
+						  <td>Ava:</td>
+						  <td>Hey, are you okay?</td>
+						  <td></td>
+						 </tr>
+						 <tr>
+						  <td>Liam:</td>
+						  <td>I'm <span class="highlight">nervous</span>.</td>
+						  <td><i>How are you?</i></td>
+						 </tr>
+						 <tr>
+						  <td>Ava:</td>
+						  <td>Is this your <span class="highlight">first gym class</span>?</td>
+						  <td><i>Ask about the class.</i></td>
+						 </tr>
+						<tr>
+						  <td>Liam:</td>
+						  <td>Yes, it is.</td>
+						  <td><i>Is this your first class?</i></td>
+						 </tr>
+						 <tr>
+						  <td>Ava:</td>
+						  <td>This is my first class too.<br>I am nervous,<br><span class="highlight">but</span> I’m <span class="highlight">also</span> very <span class="highlight">excited</span>.</td>
+						  <td><br><i>Are you okay?<br>Are you excited too?</i></td>
+						 </tr>
+						<tr>
+						  <td>Liam:</td>
+						  <td><span class="highlight">Well</span>, I'm <span class="highlight">ready now</span>. <br>What about you?</td>
+						  <td><i>Are you prepared? <br>What is the question for information?</i></td>
+						 </tr>
+						<tr>
+						  <td>Ava:</td>
+						  <td>I'm ready.<br><span class="highlight">Let’s go</span>!</td>
+						  <td><br><i>What is the invitation?</i></td>
+						 </tr>
+					</table>
+                </div>
+				<!-- Vocabulary -->
+                <div class="content">
+                    <h2>Vocabulary</h2><br>
+					<!-- Acordeón para la sección de Dialogue -->
+					<div class="accordion2">
+						<!-- Acordeón para la sección de Vocabulary and expressions -->
+						<table class="tabla-vocabulario">
+									<tr>
+										<td>nervous</td>
+										<td><img src="CC/CC-30.png" alt="Image 18" class="iconcc"> <img src="CC/CC-07.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-32.png" alt="Image 18" class="iconcc"> <img src="CC/CC-06.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"></td>
+										<td>Similar to anxious, tense. (Act nervous. Bite your fingernails.)</td>
+									</tr>
+									<tr>
+										<td>first</td>
+										<td><img src="CC/CC-31.png" alt="Image 18" class="iconcc"> <img src="CC/CC-07.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"></td>
+										<td>Number one in a line or a list.</td>
+									</tr>
+									<tr>
+										<td>gym class</td>
+										<td><img src="CC/CC-49.png" alt="Image 18" class="iconcc"> <img src="CC/CC-03.png" alt="Image 18" class="iconcc"> <img src="CC/CC-29.png" alt="Image 18" class="iconcc">&nbsp;&nbsp;&nbsp;
+										<img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-37.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"></td>
+										<td>Physical education class.</td>
+									</tr>
+									<tr>
+										<td>but</td>
+										<td><img src="CC/CC-41.png" alt="Image 18" class="iconcc"> <img src="CC/CC-02.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"></td>
+										<td>Connector for exception or contrast. <i>She is friendly but very quiet.</i></td>
+									</tr>
+									<tr>
+										<td>also</td>
+										<td><img src="CC/CC-14.png" alt="Image 18" class="iconcc"> <img src="CC/CC-37.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-17.png" alt="Image 18" class="iconcc"></td>
+										<td>Similar to <i>‘too’</i>, in addition. <i>Marco is a student. David is also a student.</i></td>
+									</tr>
+									<tr>
+										<td>excited</td>
+										<td><img src="CC/CC-03.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-54.png" alt="Image 18" class="iconcc"></td>
+										<td>Very happy and with much energy. <i>Today is my birthday. I am very excited.</i></td>
+									</tr>
+									<tr>
+										<td>ready</td>
+										<td><img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-04.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
+										<td>Similar to prepared.</td>
+									</tr>
+									<tr>
+										<td>now</td>
+										<td><img src="CC/CC-30.png" alt="Image 18" class="iconcc"> <img src="CC/CC-19.png" alt="Image 18" class="iconcc"></td>
+										<td>Similar to <i>‘at this moment’</i>.</td>
+									</tr>
+									<tr>
+										<td>Well</td>
+										<td><img src="CC/CC-38.png" alt="Image 18" class="iconcc"> <img src="CC/CC-04.png" alt="Image 18" class="iconcc"> <img src="CC/CC-37.png" alt="Image 18" class="iconcc"></td>
+										<td>EXPRESSION! Exclamation used as an introduction to a conversation.</td>
+									</tr>
+									<tr>
+										<td>Let's go!</td>
+										<td><img src="CC/CC-37.png" alt="Image 18" class="iconcc"> <img src="CC/CC-04.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc">&nbsp;&nbsp;&nbsp;
+										<img src="CC/CC-43.png" alt="Image 18" class="iconcc"> <img src="CC/CC-17.png" alt="Image 18" class="iconcc">
+										</td>
+										<td>Expression for invitation. (Informal) (Say the expression and make the gesture for an invitation.)</td>
+									</tr>
+								</table>
+					</div>
+                </div>
+				<!-- Practice -->
+                <div class="content">
+                    <h2>Practice</h2>
+					<!-- Acordeón para la sección de Dialogue -->
+					<div class="accordion2">
+												<!-- Acordeón para la sección de Ideas for real-life practice -->
+						<div class="accordion-item2">
+							<div class="accordion-header2">
+								Role-play <i class="fas fa-chevron-down"></i>
+							</div>
+							<div class="accordion-content2">
+								<p>Have students role-play different situations where they have to express different emotions in various settings. You may provide background images to make the activity feel more realistic and engaging.</p><br>
+								<p>Two friends are:</p><br>
+								<ul>
+								  <li style="margin-left: 35px;">At the airport ready to fly.</li>
+								  <li style="margin-left: 35px;">At an amusement park ready to take a roller coaster ride.</li>
+								  <li style="margin-left: 35px;">At school/in the office ready for their first day.</li>
+								  <li style="margin-left: 35px;">At school ready for a field trip.</li>
+								  <li style="margin-left: 35px;">In the office ready for a job interview.</li>
+								</ul>
+									
+								
+								<!-- Acordeón para la sección de Example -->
+								<br><h3>Example</h3>
+								<img src="images/10.jpg" alt="Image 3" class="example-image">
+							</div>
+						</div>
+						<div class="accordion-item2">
+							<div class="accordion-header2">
+								Practice <i class="fas fa-chevron-down"></i>
+							</div>
+							<div class="accordion-content2">
+								<p>This activity will be divided into two parts. First the students will learn vocabulary regarding emotions and then they will practice the emotions in a fun and interactive way.</p><br>
+								<p style="text-indent: -15px; margin-left: 15px;">1.</p><br>
+								<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will learn and practice vocabulary for emotions.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">b. Go over the first section of the Practice and show the first emoji on the screen.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">c. Have a student follow the color chart guide and pronounce the word. Follow the correction process.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">d. Demonstrate the emotion and help your students with any doubt they may have.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">e. Continue in the same fashion with the rest of the emotions.</p><br>
+								<table class="tabla-emotions" style="margin: 0 auto; text-align: center; max-width: 560px;">
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-01.png" alt="Image 3" class="iconcc"></td>
+										<td>nervous</td>
+										<td><img src="CC/CC-30.png" alt="Image 18" class="iconcc"> <img src="CC/CC-07.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-32.png" alt="Image 18" class="iconcc"> <img src="CC/CC-06.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-02.png" alt="Image 3" class="iconcc"></td>
+										<td>excited</td>
+										<td><img src="CC/CC-03.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-54.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-06.png" alt="Image 3" class="iconcc"></td>
+										<td>happy</td>
+										<td><img src="CC/CC-42.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-24.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-05.png" alt="Image 3" class="iconcc"></td>
+										<td>sad</td>
+										<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-04.png" alt="Image 3" class="iconcc"></td>
+										<td>scared</td>
+										<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-12.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-07.png" alt="Image 3" class="iconcc"></td>
+										<td>tired</td>
+										<td><img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-08.png" alt="Image 3" class="iconcc"></td>
+										<td>angry</td>
+										<td><img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-46.png" alt="Image 18" class="iconcc"> <img src="CC/CC-43.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+									<tr>
+										<td style="text-align: center;"><img src="images/icons/icons-03.png" alt="Image 3" class="iconcc"></td>
+										<td>bored</td>
+										<td><img src="CC/CC-41.png" alt="Image 18" class="iconcc"> <img src="CC/CC-14.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+									</tr>
+								</table>
+								<br>
+								<p style="text-indent: -15px; margin-left: 15px;">2.</p><br>
+								<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will practice with vocabulary for emotions. </p>
+								<p style="text-indent: -15px; margin-left: 35px;">b. Spin the wheel.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">c. Model the following conversation aloud:</p>
+								<br><h3>Example</h3><br>
+								<table>
+									<tr>
+										<td>Teacher:</td>
+										<td>How are you, Sandy?</td>
+									</tr>
+									<tr>
+										<td>Student:</td>
+										<td>I am excited.</td>
+									</tr>
+									<tr>
+										<td>Teacher:</td>
+										<td>Very good! Everybody, excited face! Show the emotion.</td>
+									</tr>
+								</table><br>
+								<p style="text-indent: -15px; margin-left: 35px;">d. Choose a student and spin the wheel.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">e. Have the student tell you the description.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">f. Ask the student: How are you?</p>
+								<p style="text-indent: -15px; margin-left: 35px;">g. Have the student respond using the emotion shown on the wheel, and encourage them to act out the appropriate gesture.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">h. Ask the rest of the class to act out the same gesture together.</p>
+								<p style="text-indent: -15px; margin-left: 35px;">i. Continue in the same fashion with the rest of the students.</p><br>
+								<table>
+									<tr>
+										<td>
+											<img src="images/practice/1_nervous.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/2_excited.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/3_happy.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/4_angry.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/5_sad.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<img src="images/practice/6_scared.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/7_happy.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/8_tired.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/9_angry.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+										<td>
+											<img src="images/practice/10_bored.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						
+
+
+						
+					</div>
+                </div>
+				<!-- Extra activities -->
+				<div class="content">
+                    <h2>Extra activities</h2>
+					<br><p>If there is any extra time, you may have students engage in further speaking practice related to the contents of the lesson. Considering the students’ level and their ability to communicate ideas, you can have them perform any of the following activities: </p>
+                    <div class="accordion">
+						<div class="accordion-text">
+							<ul class="faq-text">
+								<li>
+								<div class="question-arrow">
+								  <span class="question">Challenge.</span>
+								  <i class="bx bxs-chevron-down arrow"></i>
+								</div>
+								  <span class="line"></span>
+								  <p>This activity is intended for the students to practice the elements of the lesson by themselves in a fun way. However, you may go over the activity in class and take advantage to help the students have further practice. </p>
+							  </li>
+								<li>
+								<div class="question-arrow">
+								  <span class="question">Role-play.</span>
+								  <i class="bx bxs-chevron-down arrow"></i>
+								</div>
+								  <span class="line"></span>
+								  <p>Real life situations using new vocabulary and structures found in the lesson.</p>
+							  </li>
+						  		<li>
+									<div class="question-arrow">
+										<span class="question">Questions and answers about the story.</span>
+										<i class="bx bxs-chevron-down arrow"></i>
+									</div>
+									<span class="line"></span>
+									<p>This is a controlled activity that leads students to the vocabulary and structures considered in the objective of the lesson.</p>
+								</li>
+								<li>
+                                    <div class="question-arrow">
+                                        <span class="question">Have students talk about similar situations in their real life.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <p>This activity can help students increase their vocabulary and be aware of how they can apply a concept to similar situations.</p>
+                                </li>
+							</ul>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Función para manejar el cambio de pestañas
+    function handleTabChange(event) {
+        const selectedRadio = event.target; // Pestaña seleccionada
+        const navIndicator = document.querySelector('nav::before'); // Indicador de navegación
+        
+        // Ajustar la posición de la barra de navegación según la pestaña seleccionada
+        if (selectedRadio.id === 'steps') {
+            navIndicator.style.left = '0';
+        } else if (selectedRadio.id === 'seg1') {
+            navIndicator.style.left = '20%';
+        } else if (selectedRadio.id === 'seg2') {
+            navIndicator.style.left = '40%';
+        } else if (selectedRadio.id === 'seg3') {
+            navIndicator.style.left = '60%';
+        } else if (selectedRadio.id === 'ext') {
+            navIndicator.style.left = '80%';
+        }
+        
+        // Actualizar la posición de contenido
+        const contentBox = document.querySelector('.content-box');
+        if (selectedRadio.id === 'steps') {
+            contentBox.style.left = '0';
+        } else if (selectedRadio.id === 'seg1') {
+            contentBox.style.left = '-100%';
+        } else if (selectedRadio.id === 'seg2') {
+            contentBox.style.left = '-200%';
+        } else if (selectedRadio.id === 'seg3') {
+            contentBox.style.left = '-300%';
+        } else if (selectedRadio.id === 'ext') {
+            contentBox.style.left = '-400%';
+        }
+    }
+
+    // Manejar el cambio de pestañas
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', handleTabChange);
+    });
+
+// Manejo de acordeón
+function adjustContainerHeight() {
+    const container = document.querySelector('.container');
+    
+    // Obtener la altura de la ventana (viewport)
+    const viewportHeight = window.innerHeight; 
+    
+    // Ajustar la altura mínima basada en el tamaño del viewport
+    let totalHeight;
+
+    // Definir diferentes alturas según el ancho de la pantalla
+    if (window.innerWidth < 600) {
+        // Para pantallas pequeñas (móviles), ajustar más
+        totalHeight = viewportHeight * 1.9; // Por ejemplo, 120% del viewport para móviles
+    } else if (window.innerWidth < 1024) {
+        // Para pantallas medianas (tablets)
+        totalHeight = viewportHeight * 1.6; // 150% del viewport
+    } else {
+        // Para pantallas grandes (desktops)
+        totalHeight = viewportHeight * 1.3; // 190% del viewport
+    }
+    
+    // Añadir altura de acordeones abiertos
+    const openAccordions = document.querySelectorAll('.accordion-content2[style*="display: block"]');
+    openAccordions.forEach(accordion => {
+        totalHeight += accordion.scrollHeight; // Añadir altura dinámica en píxeles
+    });
+
+    // Ajustar el min-height del contenedor dinámicamente
+    container.style.minHeight = `${totalHeight}px`;
+}
+
+// Escuchar cambios en el tamaño de la ventana para hacerlo responsivo
+window.addEventListener('resize', adjustContainerHeight);
+
+// Ejecutar al cargar la página
+adjustContainerHeight();
+
+
+
+// Manejo del acordeón en la lista (solo un acordeón abierto a la vez)
+const accordionItems = document.querySelectorAll('.accordion-text li');
+accordionItems.forEach(item => {
+    item.addEventListener('click', function () {
+        const isOpen = this.classList.contains('showAnswer'); // Verifica si ya está abierto
+        
+        // Cerrar todos los acordeones
+        accordionItems.forEach(i => i.classList.remove('showAnswer'));
+        
+        // Si el acordeón no estaba abierto, abrirlo
+        if (!isOpen) {
+            this.classList.add('showAnswer');
+        }
+    });
+});
+
+    // Manejo del acordeón en los elementos
+    const accordionItems2 = document.querySelectorAll('.accordion-item2');
+    accordionItems2.forEach(item => {
+        const header = item.querySelector('.accordion-header2');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content2');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active2');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+	// Manejo del acordeón en los elementos
+    const accordionItems3 = document.querySelectorAll('.accordion-item');
+    accordionItems3.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+
+    // Inicializar altura del contenedor al cargar
+    adjustContainerHeight();
+});
+</script>
+</body>
+</html>
