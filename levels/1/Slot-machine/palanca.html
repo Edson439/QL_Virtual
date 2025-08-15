@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palanca de Slot Machine</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .machine {
+            position: relative;
+            width: 200px;
+            height: 400px;
+            background: gray;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 800px;
+        }
+        .lever {
+            position: absolute;
+            right: -50px;
+            top: 50px;
+            width: 20px;
+            height: 150px;
+            background: silver;
+            border-radius: 10px;
+            transform-origin: top;
+            transition: transform 0.2s ease-out;
+        }
+        .ball {
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: red;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+        .display {
+            margin-top: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 80px;
+            padding: 10px;
+            background: black;
+            border-radius: 10px;
+            border: 2px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .rolling {
+            animation: roll 1s ease-in-out;
+        }
+        @keyframes roll {
+            0% { transform: translateY(0); opacity: 1; }
+            25% { transform: translateY(-10px); opacity: 0.5; }
+            50% { transform: translateY(10px); opacity: 0.5; }
+            75% { transform: translateY(-5px); opacity: 0.8; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="machine">
+        <div class="lever" id="lever">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div class="display" id="display">000</div>
+    <script>
+        const lever = document.getElementById('lever');
+        const display = document.getElementById('display');
+        let isDragging = false;
+        let startY = 0;
+
+        function getRandomNumber() {
+            let num = Math.floor(Math.random() * 314) + 1;
+            return num.toString().padStart(3, '0');
+        }
+
+        function animateNumber() {
+            let counter = 0;
+            let interval = setInterval(() => {
+                display.textContent = getRandomNumber();
+                counter++;
+                if (counter > 20) {
+                    clearInterval(interval);
+                    display.textContent = getRandomNumber();
+                }
+            }, 100);
+        }
+
+        lever.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startY = e.clientY;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                let deltaY = e.clientY - startY;
+                let rotation = Math.min(Math.max(deltaY, 0), 20);
+                lever.style.transform = `rotateX(${rotation}deg) rotateZ(40deg)`;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (isDragging) {
+                isDragging = false;
+                lever.style.transform = 'rotateX(0deg) rotateZ(0deg)';
+                animateNumber();
+            }
+        });
+    </script>
+</body>
+</html>
