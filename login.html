@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso de Inglés - SSC</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+	* {
+	  box-sizing: border-box;
+	  margin: 0;
+	  padding: 0;
+	}
+
+	body {
+	  font-family: 'Inter', sans-serif;
+	  display: flex;
+	  height: 100vh;
+	}
+.btn-primary {
+  display: block;
+  text-align: center;
+  background-color: #1f4ed8;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+	.container {
+	  display: flex;
+	  width: 100%;
+	}
+
+	.left {
+	  flex: 1.7;
+	  background-color: #eee;
+	}
+
+	.left img {
+	  width: 100%;
+	  height: 100vh;
+	  object-fit: cover;
+	}
+
+	.right {
+	  flex: .5;
+	  padding: 50px 100px;
+	  display: flex;
+	  flex-direction: column;
+	  justify-content: center;
+	  background: #fff;
+	}
+
+.logo-ssc {
+  width: 400px;
+  margin: 0 auto 30px;
+  display: block;
+}
+
+	h2 {
+	  font-size: 24px;
+	  margin-bottom: 10px;
+	}
+
+	.subtitle {
+	  font-size: 14px;
+	  color: #666;
+	  margin-bottom: 30px;
+	}
+
+	.login-form {
+	  display: flex;
+	  flex-direction: column;
+	  gap: 20px;
+	}
+
+	.input-group {
+	  position: relative;
+	}
+
+	.input-group input {
+	  width: 100%;
+	  padding: 12px 40px 12px 12px;
+	  font-size: 14px;
+	  border: 1px solid #ccc;
+	  border-radius: 6px;
+	}
+
+	.input-group .clear-icon,
+	.input-group .toggle-password {
+	  position: absolute;
+	  right: 12px;
+	  top: 50%;
+	  transform: translateY(-50%);
+	  cursor: pointer;
+	  font-size: 14px;
+	  color: #888;
+	}
+	.options {
+	  display: flex;
+	  justify-content: space-between;
+	  font-size: 13px;
+	  align-items: center;
+	  margin-bottom: 20px;
+	}
+	.btn-primary {
+	  background-color: #1f4ed8;
+	  color: white;
+	  padding: 12px;
+	  border: none;
+	  border-radius: 6px;
+	  font-weight: bold;
+	  cursor: pointer;
+	}
+
+	.btn-google {
+	  background: white;
+	  color: #444;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 6px;
+	  font-weight: 500;
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  gap: 10px;
+	  cursor: pointer;
+	}
+
+	.btn-google img {
+	  width: 20px;
+	  height: 20px;
+	}
+
+	.divider {
+	  text-align: center;
+	  color: #aaa;
+	  margin: -10px 0 10px;
+	}
+
+	.register {
+	  text-align: center;
+	  font-size: 13px;
+	  margin-top: 10px;
+	}
+
+	.register a {
+	  color: #1f4ed8;
+	  text-decoration: none;
+	}
+
+	.ql-logo {
+	  margin-top: 30px;
+	  width: 120px;
+	  align-self: center;
+	}
+.input-group {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <img src="assets/img/4970148030972014548.jpg" alt="Policía turística CDMX" />
+    </div>
+    <div class="right">
+      <img src="assets/img/Virtual_03.png" alt="Logo SSC" class="logo-ssc" />
+      <h2>Welcome Teacher</h2>
+      <p class="subtitle"></p>
+
+      <form class="login-form">
+        <label for="email">Username</label>
+        <div class="input-group">
+          <input type="email" id="email" placeholder="diana.alba@example.com" required />
+          <span class="clear-icon" onclick="clearInput('email')">✕</span>
+        </div>
+
+<label for="password">Password</label>
+<div class="input-group">
+  <input type="password" id="password" placeholder="********" required />
+  <i class="fa-solid fa-eye toggle-password" onclick="togglePassword(this)"></i>
+</div>
+
+        <div class="options">
+          <label><input type="checkbox" /> Remember me</label>
+          <a href="#">Forgot your password?</a>
+        </div>
+
+        <a href="index.html" class="btn-primary">SIGN IN</a>
+
+ 
+
+        <button type="button" class="btn-google">
+          <img src="assets/img/Google.png" alt="Google" /> Sign in with Google
+        </button>
+
+        <p class="register">Don’t have an account? <a href="#">Register</a></p>
+        <!--<img src="images/powered.png" class="ql-logo" alt="Quick Learning logo" /> -->
+      </form>
+    </div>
+  </div>
+	  <script>
+		  
+		function togglePassword() {
+		  const password = document.getElementById("password");
+		  password.type = password.type === "password" ? "text" : "password";
+		}
+
+		function clearInput(id) {
+		  document.getElementById(id).value = "";
+		}
+		  
+		function togglePassword(icon) {
+		  const input = document.getElementById("password");
+		  const isPassword = input.type === "password";
+
+		  input.type = isPassword ? "text" : "password";
+		  icon.classList.toggle("fa-eye");
+		  icon.classList.toggle("fa-eye-slash");
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Quick Learning • Launcher</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.7.1/slimselect.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.7.1/slimselect.min.js"></script>
+
+	
+<style>
+  :root{
+    --ink:#123055;
+    --brand:#196dc3;
+    --brand-dark:#0a43a4;
+    --bg:white;
+    --panel:#ffffff;
+    --ring:#e6eefc;
+    --pill:#f2f6ff;
+    --muted:#9aa8c2;
+    --ok:#136df0;
+    --ok-2:#0b55d4;
+    --shadow:0 12px 28px rgba(2,6,23,.08);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,sans-serif;
+    color:var(--ink);
+  }
+
+  /* --------------------------------- Header -------------------------------- */
+  .topbar{
+    height:64px;
+    background:#fff;
+    display:flex; align-items:center;
+  }
+.topbar__inner{
+  width:100%;
+  margin:0;
+  padding-left:16px; /* un poco de aire desde el borde */
+  display:flex;
+  align-items:center;
+}
+.brand{
+  height:auto;
+  max-height:30px;
+  width:auto;
+  display:block;
+}
+
+  /* ------------------------------- Main card -------------------------------- */
+.wrap{
+  width:min(480px, 92%);   /* antes 560px → más compacto */
+  margin: 100px auto 40px;   /* menos espacio arriba y abajo */
+  display:grid; 
+  gap:18px;                /* menos separación entre elementos */
+  justify-items:center;
+  justify-items:center;
+}
+
+.preview{
+  width:100%;
+  aspect-ratio: 782 / 292;   /* mantiene exactamente la proporción de tu imagen */
+  border-radius:14px;
+  overflow:hidden;
+  background-color:white;  /* fallback */
+  position:relative;
+}
+	
+.preview img{
+  position:absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit:cover;
+}
+
+  .preview__thumb{
+    width:88px; height:88px; border-radius:12px; overflow:hidden;
+    flex:0 0 auto; background:#03224a;
+    display:grid; place-items:center;
+  }
+  .preview__thumb img{
+    width:100%; height:100%; object-fit:cover; display:block;
+  }
+
+
+  /* -------------------------------- Controls ------------------------------- */
+  .row{ width:100%; display:grid; gap:18px }
+.field{
+  position: relative;
+  background: transparent;   /* la caja visible será .ss-main */
+  border: none;              /* <-- sin borde aquí */
+  padding: 0;                /* <-- sin padding (evita caja “interna”) */
+  height: auto;              /* la altura la pone .ss-main */
+  cursor: pointer;
+}
+
+	/* Estado seleccionado (relleno azul muy claro y borde azul intenso) */
+.field.is-filled{
+  background:#eef5ff;                 /* relleno tipo Material */
+  border-color:var(--brand);
+}
+
+/* Opcional: un poquito más de énfasis al texto e ícono cuando hay valor */
+.field.is-filled .select{ font-weight:600; color:var(--brand); }
+.field.is-filled .chev{ color:var(--brand); }
+
+.select {
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:var(--brand);
+  font-weight:500; /* en lugar de 800 */
+  font-size: 22px;
+  width:100%;
+  padding-right:0;
+  padding-left:28px;
+  cursor:pointer;
+  text-align:center; /* para centrar texto como en el ejemplo */
+}
+.select.placeholder {
+  color: var(--brand); /* azul fuerte */
+  font-weight: 500; /* un poco más liviano para que se vea como Material */
+}
+
+  .chev{
+    flex:0 0 auto; 
+	width:22px; height:22px;
+    display:grid; place-items:center;
+  }
+.chev {
+  font-size: 44px; /* un poco más pequeño */
+  color: var(--brand);
+  line-height: 1;
+  margin-top: -8px;
+}
+
+
+  /* --------------------------------- Button -------------------------------- */
+  .start {
+    width:100%; 
+	height:70px; border-radius:14px;
+    border:none; color:#fff; font-weight:900; 
+	font-size:22px;
+    background:linear-gradient(180deg, var(--ok), var(--ok-2));
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    cursor:pointer;
+    transition:transform .15s ease, filter .15s ease, opacity .15s ease;
+  }
+  .start svg{ width:20px; height:20px; fill:#fff }
+  .start:active{ transform:translateY(1px) }
+
+  .start[disabled]{
+    background:#c9c9c9; box-shadow:none; cursor:not-allowed; opacity:.9;
+  }
+
+  /* ----------------------------- Helper text row ---------------------------- */
+  .helper{
+    width:100%;
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:2px; color:#5270a5; font-size:14px; font-weight:700;
+  }
+	
+	.start .material-icons-round,
+.start .fa-rocket {
+  font-size: 20px;
+  color: white;
+}
+	.material-icons-round {
+  font-size: 32px;
+}
+	
+	
+	
+	
+	/* Slim Select – integra con tu diseño */
+.ss-main {
+  width: 100%;
+  height: 70px;
+  border-radius: 12px;
+  border: 1.5px solid var(--brand);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; color: var(--brand);
+  background: var(--panel);
+  box-shadow: none;
+  margin: 0;
+  padding-right: 10px;
+}
+
+
+.ss-main .ss-single-selected { 
+  width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 48px;              /* aire para el ícono */
+  background: transparent;
+  border: none; box-shadow: none;
+}
+
+.ss-main .ss-arrow {
+  right: 16px;
+  border: solid var(--brand);
+  border-width: 0 2px 2px 0;
+  padding: 4px;
+  transform: rotate(45deg);
+}
+
+/* Estado seleccionado (fondo azul muy claro) para imitar tu .is-filled */
+.field .ss-main.is-filled,
+.field.is-filled .ss-main {
+  background: #eef5ff;
+  border-color: var(--brand);
+}
+
+/* Panel de opciones */
+.ss-content {
+  background: white;            /* ✅ fondo blanco */
+  border:1.5px solid var(--brand) !important;
+  border-radius: 0 0 12px 12px !important;
+  padding:0 !important;
+  overflow: hidden;
+}
+.ss-content .ss-list {
+  max-height: 320px;            /* scroll si hay muchas */
+}
+
+.ss-content .ss-option {
+  font-size: 18px;
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.ss-content .ss-option:hover,
+.ss-content .ss-option.ss-highlighted,
+.ss-content .ss-option.ss-selected {
+  background: #e6f0ff;
+  color: var(--brand);
+}
+
+/* Oculta el select nativo pero mantiene accesibilidad */
+label.field select.select {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none; /* manejamos todo con SlimSelect */
+}
+
+/* Hover o resaltado */
+.ss-content .ss-option:hover,
+.ss-content .ss-option.ss-highlighted {
+  background: #e6f0ff !important; /* Azul claro */
+  color: var(--brand) !important;
+}
+
+.ss-content .ss-list{
+  padding:0 !important;
+  margin:0 !important;
+}
+.ss-content .ss-option{
+  display:block !important;
+  box-sizing:border-box !important;
+  margin:0 !important;
+  padding:14px 20px !important;
+  text-align:center !important;
+  background:#fff !important;
+}
+/* Placeholder gris (Choose a Level/Lesson) */
+.ss-content .ss-option:first-child{
+  color:#9aa1a9 !important;
+  font-weight:500 !important;
+}
+/* Niveles siempre en azul */
+.ss-content .ss-option:not(:first-child){
+  color:var(--brand) !important;
+  font-weight:600 !important;
+}
+/* Hover / seleccionado en azul claro */
+.ss-content .ss-option:hover,
+.ss-content .ss-option.ss-highlighted,
+.ss-content .ss-option.ss-selected{
+  background:#e6f0ff !important;
+  color:var(--brand) !important;
+}
+/* ── Separadores entre opciones del desplegable ── */
+.ss-content .ss-list .ss-option{
+  border-bottom: 1px solid #e6eefc !important; /* línea gris-azulada */
+}
+
+.ss-content .ss-list .ss-option:last-child{
+  border-bottom: none !important; /* sin línea en la última */
+	
+}
+
+/* (opcional) que también haya línea bajo el placeholder */
+.ss-content .ss-list .ss-option:first-child{
+  border-bottom: 1px solid #e6eefc !important;
+}
+</style>
+</head>
+<body>
+
+  <!-- Header -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <img class="brand" src="assets/img/Virtual_03.png" alt="Quick Learning Virtual">
+  </div>
+</header>
+
+  <!-- Content -->
+  <main class="wrap">
+    <!-- Preview card (image + title) -->
+<section class="preview" id="preview">
+  <img id="previewImg" src="assets/img/welcome.jpg" alt="Preview">
+</section>
+
+    <div class="row" aria-label="selectors">
+      <!-- LEVEL -->
+      <label class="field" for="level">
+        <select id="level" class="select placeholder">
+          <option value="" selected disabled>Choose a Level</option>
+          <!-- Levels 1..17 -->
+          <option value="1">LEVEL 1</option>
+          <option value="2">LEVEL 2</option>
+          <option value="3">LEVEL 3</option>
+          <option value="4">LEVEL 4</option>
+          <option value="5">LEVEL 5</option>
+          <option value="6">LEVEL 6</option>
+          <option value="7">LEVEL 7</option>
+          <option value="8">LEVEL 8</option>
+          <option value="9">LEVEL 9</option>
+          <option value="10">LEVEL 10</option>
+          <option value="11">LEVEL 11</option>
+          <option value="12">LEVEL 12</option>
+          <option value="13">LEVEL 13</option>
+          <option value="14">LEVEL 14</option>
+          <option value="15">LEVEL 15</option>
+          <option value="16">LEVEL 16</option>
+          <option value="17">LEVEL 17</option>
+        </select>
+
+      </label>
+
+      <!-- LESSON -->
+      <label class="field" for="lesson">
+        <select id="lesson" class="select placeholder">
+          <option value="" selected disabled>Choose a Lesson</option>
+          <!-- Lessons 1..40 -->
+          <!-- (esto evita escribir 40 options a mano) -->
+          <script>
+            for(let i=1;i<=40;i++){
+              document.write(`<option value="${i}">LESSON ${i}</option>`);
+            }
+          </script>
+        </select>
+      </label>
+    </div>
+
+    <!-- Start -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
+<button id="startBtn" class="start" disabled>
+  <span class="material-icons-round">rocket_launch</span>
+  START
+</button>
+  </main>
+
+<script>
+  // ============= CONFIGURACIÓN RÁPIDA =============
+  const WELCOME_IMG = 'assets/img/welcome.jpg';
+
+  // Carpeta base (sin %20; encodeURI se encarga de codificar espacios)
+  const BASE_PATH = 'file:///Volumes/Disco Solido/Edson 2025/Virtual 45/incio/1A';
+  // ================================================
+
+  const levelSel   = document.getElementById('level');
+  const lessonSel  = document.getElementById('lesson');
+  const previewImg = document.getElementById('previewImg');
+  const startBtn   = document.getElementById('startBtn');
+
+  // Estado
+  let currentLevel  = '';
+  let currentLesson = '';
+
+  // Helper: arma la URL final SOLO con la lección
+  function buildLessonFileURL(lessonNumber){
+    const raw = `${BASE_PATH}/levels/${lessonNumber}/lesson-${lessonNumber}.html`;
+    return encodeURI(raw);
+  }
+
+  // Cambia el thumbnail al seleccionar nivel
+  levelSel.addEventListener('change', () => {
+    currentLevel = levelSel.value;
+    levelSel.classList.remove('placeholder');
+
+    if (currentLevel) {
+      // imagen por nivel: assets/img/Level{N}.jpg
+      const src = `assets/img/Level${currentLevel}.jpg`;
+      previewImg.src = src;
+      previewImg.alt = `Level ${currentLevel}`;
+    } else {
+      previewImg.src = WELCOME_IMG;
+    }
+    updateButton();
+  });
+
+  // Guarda la lección
+  lessonSel.addEventListener('change', () => {
+    currentLesson = lessonSel.value;
+    lessonSel.classList.remove('placeholder');
+    updateButton();
+  });
+
+  // Habilitar / deshabilitar botón
+  function updateButton(){
+    const ready = !!currentLevel && !!currentLesson;
+    startBtn.disabled = !ready;
+  }
+
+  // Navegación
+  startBtn.addEventListener('click', () => {
+    if (startBtn.disabled) return;
+    const url = buildLessonFileURL(currentLesson);
+    window.location.href = url;
+  });
+
+  // Estado inicial
+  function init(){
+    previewImg.src = WELCOME_IMG;
+    startBtn.disabled = true;
+    levelSel.classList.add('placeholder');
+    lessonSel.classList.add('placeholder');
+  }
+  init();
+
+  // Marca/desmarca el estado visual del field según si el <select> tiene valor
+  function markFilled(selectEl){
+    const field = selectEl.closest('.field');
+    if (!field) return;
+    if (selectEl.value) {
+      field.classList.add('is-filled');
+      selectEl.classList.remove('placeholder');
+    } else {
+      field.classList.remove('is-filled');
+      selectEl.classList.add('placeholder');
+    }
+  }
+
+  // Cambia el thumbnail al seleccionar nivel
+  levelSel.addEventListener('change', () => {
+    currentLevel = levelSel.value;
+    levelSel.classList.remove('placeholder');
+    markFilled(levelSel);
+
+    if(currentLevel){
+      const src = `assets/img/Level${currentLevel}.jpg`;
+      previewImg.src = src;
+      previewImg.alt = `Level ${currentLevel}`;
+    }else{
+      previewImg.src = WELCOME_IMG;
+    }
+    updateButton();
+  });
+
+  // Guarda la lección
+  lessonSel.addEventListener('change', () => {
+    currentLesson = lessonSel.value;
+    lessonSel.classList.remove('placeholder');
+    markFilled(lessonSel);
+    updateButton();
+  });
+
+  // Estado inicial
+  function init(){
+    previewImg.src = WELCOME_IMG;
+    startBtn.disabled = true;
+    levelSel.classList.add('placeholder');
+    lessonSel.classList.add('placeholder');
+    markFilled(levelSel);
+    markFilled(lessonSel);
+  }
+  init();
+	
+	
+// Reemplaza los selects nativos por Slim Select (sin buscador)
+const levelSlim = new SlimSelect({
+  select: '#level',
+  settings: { showSearch: false }
+});
+const lessonSlim = new SlimSelect({
+  select: '#lesson',
+  settings: { showSearch: false }
+});
+
+// Marca visualmente el “relleno” (para el fondo azul claro)
+function refreshFilledState() {
+  const levelField  = document.querySelector('label[for="level"]');
+  const lessonField = document.querySelector('label[for="lesson"]');
+  if (levelSel.value)  levelField.classList.add('is-filled');  else levelField.classList.remove('is-filled');
+  if (lessonSel.value) lessonField.classList.add('is-filled'); else lessonField.classList.remove('is-filled');
+}
+levelSel.addEventListener('change', refreshFilledState);
+lessonSel.addEventListener('change', refreshFilledState);
+refreshFilledState();
+
+// Como ya usamos Slim Select, puedes quitar la apertura manual showPicker()
+document.querySelectorAll('.field').forEach(field => {
+  field.onclick = () => {
+    const ss = field.querySelector('.ss-main');
+    if (ss) ss.click(); // abre el panel en cualquier click dentro del field
+  };
+});
+</script>
+</body>
+</html>
