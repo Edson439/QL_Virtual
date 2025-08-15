@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 1, Lesson 1</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        body {
+			margin: 60px 10px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100vh;
+            background: #f4f4f4;
+        }
+		.header-bar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 40px; /* Ajusta según sea necesario */
+			background-color: #1e3a8a; /* Azul oscuro */
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0 20px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			z-index: 1000;
+		}
+
+		.header-bar img {
+			height: 20px; /* Ajusta el tamaño del logo */
+		}
+
+		.header-bar .header-text {
+			color: white;
+			font-size: 14px;
+		}
+
+        .wrapper {
+			margin: 60px;
+            background: #fff;
+            padding: 5px 30px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+                        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 1200px; /*Medida de contenedor ancho*/
+        }
+		.container {
+			width: 100%;
+			min-height: 3020px; /*Medida de contenedor alto*/
+			position: relative;
+			overflow-x: hidden;
+			max-width: 1140px;
+		}
+        .content {
+			width: 1200px;
+			max-width: 1140px;
+            padding: 10px 0;
+        }
+		.content-box {
+			position: absolute;
+			transition: 0.3s ease;
+			display: flex;
+			align-items: flex-start;
+			justify-content: flex-start;
+		}
+		h1, h2 {
+			color: #293a7b;
+		}		
+		h3{
+			color: #293a7b;
+			font-size: 15px;
+		}
+		p {
+			color: #595959;
+		}
+        input[type="radio"] {
+            display: none;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: relative;
+            padding: 20px 0;
+			font-size: 18px;
+        }
+        nav::after {
+            position: absolute;
+            content: "";
+            background: #e7e7e7;
+            width: 100%;
+            height: 1px;
+            top: 62px;
+            z-index: 0;
+        }
+        nav::before {
+            position: absolute;
+            content: "";
+            background: #293a7b;
+            width: 33.33%;
+            height: 5px;
+            top: 58px;
+            left: 0;
+            z-index: 1;
+            border-radius: 8px 8px 0 0;
+            transition: 0.3s;
+        }
+        nav label {
+            position: relative;
+            cursor: pointer;
+            width: 33.33%;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 500;
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+		nav label i {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        nav label::after {
+            position: absolute;
+            content: "";
+            background: #89acd9;
+            display: block;
+            padding-top: 200%;
+            padding-left: 350%;
+            margin-top: -100%;
+            opacity: 0;
+            transition: all 0.9s;
+        }
+        nav label:active::after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s;
+        }
+
+		#steps:checked ~ nav::before { left: 0; }
+        #seg1:checked ~ nav::before { left: 33.33%; }
+        #seg2:checked ~ nav::before { left: 66.66%; }
+
+        #steps:checked ~ .container .content-box { left: 0; }
+        #seg1:checked ~ .container .content-box { left: -100%; }
+        #seg2:checked ~ .container .content-box { left: -200%; }
+
+        #steps:checked ~ nav label:nth-child(1),
+        #seg1:checked ~ nav label:nth-child(2),
+        #seg2:checked ~ nav label:nth-child(3) {
+            color: #293a7b;
+        }
+        ::selection {
+            background: #293a7b;
+            color: #fff;
+        }
+        .accordion {
+            display: flex;
+			max-width: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 0px 0px;
+        }
+        .accordion .accordion-text {
+            width: 100%;
+        }
+        .accordion .accordion-text .title {
+            font-size: 35px;
+            font-weight: 500;
+            color: #065fd4;
+        }
+        .accordion .accordion-text .faq-text {
+            margin-top: 25px;
+            min-height: 500px;
+            overflow-y: auto;
+        }
+        .faq-text::-webkit-scrollbar {
+            display: none;
+        }
+        .accordion .accordion-text li {
+            list-style: none;
+            cursor: pointer;
+        }
+        .accordion-text li .question-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .accordion-text li .question-arrow .question {
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li .question-arrow .arrow {
+            font-size: 20px;
+            color: #595959;
+            transition: all 0.3s ease;
+        }
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            transform: rotate(-180deg);
+        }
+        .accordion-text li:hover .question-arrow .question,
+        .accordion-text li:hover .question-arrow .arrow {
+            color: #065fd4;
+        }
+        .accordion-text li.showAnswer .question-arrow .question,
+        .accordion-text li.showAnswer .question-arrow .arrow {
+            color: #065fd4;
+        }
+      	.accordion-text li .line {
+            display: block;
+            height: 1px;
+            width: 100%;
+            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        .accordion-text li p {
+            width: 92%;
+            font-size: 15px;
+            font-weight: 500;
+            color: #595959;
+            display: none;
+			margin-bottom: 20px;
+			padding: 0 0 10px 20px;
+        }
+        .accordion-text li.showAnswer p {
+            display: block;
+        }
+		.steps-list {
+			list-style-type: decimal;
+			padding-left: 20px;
+		}
+		.steps-list li {
+			margin-bottom: 0px;
+		}
+		.steps-list p {
+			margin: 0;
+			padding-left: 20px;
+			font-size: 15px;
+			font-weight: 500;
+			color: #595959;
+			text-indent: -20px;
+		}
+		.indented-paragraph {
+			text-indent: 0px;
+			margin-left: 20px;
+			margin-right: 0;
+		} 
+		table {
+            width: 98%;
+            max-width: 1000px;
+			margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid #ddd;
+            color: #555;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #293a7b;
+            font-size: 18px;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #293a7b;
+        }
+
+        /* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario td:nth-child(2) {
+            width: 30%; /* Ajustar ancho de la segunda columna */
+        }
+        .tabla-vocabulario td:nth-child(3) {
+            width: 55%; /* Ajustar ancho de la tercera columna */
+        }
+		
+		/* Ajustes específicos para la segunda tabla */
+        .tabla-vocabulario2 td:nth-child(1) {
+            width: 15%; /* Ajustar ancho de la primera columna */
+        }
+        .tabla-vocabulario2 td:nth-child(2) {
+            width: 85%; /* Ajustar ancho de la segunda columna */
+        }
+		i.fas.fa-image {
+			font-size: 1em;
+			vertical-align: middle;
+			margin-right: 5px;
+			color: #0174b1;
+		}
+		.example-image {
+            display: block;
+            margin: 20px auto;
+            width: 100%;
+			max-width: 1000px;
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+		/* Estilos de Accordion */
+        .accordion2 {
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+			color: #595959;	
+        }
+        .accordion-item2 {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;z
+			text-decoration: none; /* Elimina el subrayado del texto */
+			border: none; /* Asegúrate de que no haya bordes */
+        }
+        .accordion-header2 {
+            background-color: #e9f8ff;
+            color: #293a7b;
+            cursor: pointer;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+        }
+        .accordion-content2 {
+            display: none;
+            padding: 15px;
+            background-color: #fff;
+        }
+        .accordion-header2 i {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active2 i {
+            transform: rotate(180deg);
+        }
+		.header-container {
+		  display: flex; /* Hace que los hijos del contenedor se alineen en una fila */
+		  justify-content: space-between;
+		  align-items: center;
+		  width: 100%;
+		  margin: 20px 0;
+		}
+		.header-container h1 {
+		  margin: 0px; /* Elimina márgenes predeterminados */
+		  padding: 0; /* Elimina rellenos predeterminados */
+		}
+		  .iconcc {
+            height: 24px;
+        }
+		.highlight2 {
+            position: relative;
+            top: -6px;
+        }
+.accordion-text .answer {
+    display: none;
+}
+.accordion-text li.showAnswer .answer {
+    display: block;
+}
+        /* Media Queries for Responsiveness */
+		@media (max-width: 1260px) {
+				body {
+					margin: 20px 10px;
+				}
+				.wrapper {
+					max-width: 960px; /*Medida de contenedor*/
+				}
+				nav {
+					font-size: 16px;
+				}
+				.container {
+					max-width: 900px;
+					width: 960px;
+				}
+				.content {
+					max-width: 900px;
+					width: 960px;
+				}
+				.accordion2 {
+					max-width: 960px;
+			  }
+				td {
+					font-size: 14px;
+				}
+			}
+        @media (max-width: 1024px) {
+			body {
+				margin: 20px 10px;
+			}
+			
+			.wrapper {
+				max-width: 840px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 780px;
+				width: 840px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 780px;
+				width: 840px;
+			}
+			.accordion2 {
+				max-width: 780px;
+      	 	}
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			/* Ajustes para mantener el indicador de navegación */
+			#steps:checked ~ nav::before {
+				left:0;
+				top: 34%; /* Ajusta el valor para que se alinee correctamente con el item activo */
+			}
+			#seg1:checked ~ nav::before {
+				left:0;
+				top: 63%;
+			}
+			#seg2:checked ~ nav::before {
+				left:0;
+				top: 93%;
+			}
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 900px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            height: 20px;
+      		  }
+			.wrapper {
+				max-width: 720px; /*Medida de contenedor*/
+			}
+			.container {
+				max-width: 660px;
+				width: 720px;
+				margin-top: 20px;
+			}
+			.content {
+				max-width: 660px;
+				width: 720px;
+			}
+			.accordion2 {
+				max-width: 720px;
+      	  }
+			nav {
+				flex-direction: column;
+				padding: 10px;
+			}
+				nav::after {
+					height: 0px;
+				}
+			nav::before {
+				width: 100%;
+				height: 3px;
+				top: 50px;
+				left: 0;
+			}
+            nav label {
+                width: 100%;
+                padding: 10px 0;
+                text-align: left;
+                border-bottom: 1px solid #e7e7e7;
+            }
+			th {
+				font-size: 16px;
+			}
+			td {
+				font-size: 14px;
+			}
+        }
+		@media (max-width: 768px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+            	 height: 15px;
+			 }
+			h1 {
+				font-size: 20px;
+			}		
+			.wrapper {
+				max-width: 520px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 460px;
+				width: 520px;
+				
+			}
+			.content {
+				max-width: 460px;
+				width: 520px;
+			}
+			.accordion2 {
+				max-width: 520px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 576px) {
+			body {
+				margin: 20px 10px;
+			}
+			.wrapper {
+				max-width: 468px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 420px;
+				width: 468px;
+			}
+			.content {
+				max-width: 420px;
+				width: 468px;
+			}
+			.accordion2 {
+				max-width: 468px;
+      	  }
+			td {
+				font-size: 11px;
+			}
+        }
+		@media (max-width: 480px) {
+			body {
+				margin: 20px 10px;
+			}
+			.iconcc {
+           	 height: 8px;
+      		}
+
+			.wrapper {
+				max-width: 330px; /*Medida de contenedor*/
+			}	
+			.container {
+				max-width: 290px;
+				width: 330px;
+			}
+			.content {
+				max-width: 290px;
+				width: 330px;
+			}
+			.accordion2 {
+				max-width: 330px;
+      	    }
+			table {
+            width: 100%;
+            max-width: 100px;
+       	 	}
+			td {
+				font-size: 10px;
+			}
+			th {
+				font-size: 12px;
+			}
+			td {
+				font-size: 10px;
+			}
+        }
+	</style>
+</head>
+
+<body>
+	<div class="header-bar">
+		<img src="images/Virtual_-01-02.png" alt="Logo"> <!-- Reemplaza con la ruta del logo -->
+		<span class="header-text">Manuals <span style="font-size: 10px">▼</span></span>
+	</div>
+	<div class="wrapper">
+		<div class="header-container">
+  			<h1>LESSON 1 > Aprender y repasar los sonidos de la tabla fonética de colores para desarrollar una perfecta pronunciación.</h1>
+		</div>
+        <input type="radio" name="slider" id="steps" checked>
+        <input type="radio" name="slider" id="seg1">
+        <input type="radio" name="slider" id="seg2">
+        <nav>
+            <label for="steps" class="steps">STEPS OF THE METHOD PART 1</label>
+            <label for="seg1" class="seg1">STEPS OF THE METHOD PART 2</label>
+            <label for="seg2" class="seg2">STEPS OF THE METHOD PART 3</label>
+        </nav>
+        <div class="container">
+            <div class="content-box">
+				<!-- Part 1 -->
+                <div class="content">
+                    <h2>Part 1</h2><br>
+					<p><span class="highlight">Learning goals:</span> Students should be able to reproduce 28 out of the 59 phonetic sounds found on the Color Chart.</p>		
+                    <div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">                 
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Say the ‘Introducción al Color Chart’ dialogue*.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Make your students aware of the importance of learning and using the Color Chart daily to improve their pronunciation.</p>
+										<p><i>*Esta tabla de colores es una herramienta de uso continuo para corregir la pronunciación ya que es necesario que nuestras cuerdas vocales aprendan a reproducir sonidos que nunca antes habían reproducido porque no existen en español, por ejemplo: en español solo existen 5 sonidos vocales y en inglés son 24. Cada ícono representa un sonido inglés que no existe en español, entonces, recuerden que cada ícono no representa una letra sino un sonido inglés. Esta tabla de colores es el corazón de Q.L. para que todos ustedes logren una excelente pronunciación. La estaremos utilizando continuamente todos los días para que ustedes la dominen, se van a sorprender de la rapidez con que se memoriza.</i></p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Say the sounds slowly from 1 to 58 without stopping so that students get the general idea.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<p>Click on the icon and say the sound out loud. Continue in the same fashion with all the sounds of the color chart.  </p>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Teach sounds: <img src="CC/CC-15.png" alt="Image 05" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-16.png" alt="Image 16" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-17.png" alt="Image 17" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-24.png" alt="Image 24" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-25.png" alt="Image 25" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-29.png" alt="Image 29" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, and <img src="CC/CC-30.png" alt="Image 30" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;"> first.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<p>Explain to your students that they will learn the seven most common sounds. You may use the following speech:</p>
+									<p><i>Primero, vamos a conocer los 7 sonidos más comunes. Yo voy a decir un sonido, y mientras lo hago, quiero que observen bien cómo muevo la boca para que puedan imitar la articulación correctamente. Después, elegiré a uno de ustedes para que lo repita en voz alta. Mientras tanto, los demás pueden practicar también, pero con sus micrófonos apagados.</i></p>
+									<ol class="steps-list">
+										<li>
+											<p>a. Click on the icon of the first sound and say it out loud. Make sure all students are able to see how you articulate the sound.</p>
+										</li>
+										<li>
+											<p>b. Select a student and ask him/her to say the sound out loud after you.</p>
+										</li>
+										<li>
+											<p>c. Continue in the same fashion until you have taught the seven sounds. </p>
+										</li>
+									</ol>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 4. Spell out the words provided for every sound taught so that the students learn to link the sounds.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<div class="answer">
+										<p>Explain to your students how the color chart works to form words. You may use the following speech:</p>
+										<p><i>Ahora vamos a aprender cómo unir un sonido con otro para ir construyendo una palabra paso a paso, y logrando además una pronunciación perfecta. Por ejemplo: </i></p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Model the first word: Demonstrate on the screen how to join the individual sounds as you gradually form the complete word.</p>
+											</li>
+										</ol>
+										<table style="width: 300px">
+											<tr>
+												<td><img src="CC/CC-15.png" alt="Image 15" class="iconcc"></td>
+												<td>I’m</td>
+												<td><img src="CC/CC-15.png" alt="Image 15" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+											</tr>
+										</table><br>
+										<ol class="steps-list">
+											<li>
+												<p>b. Select one student and have him/her join the sounds aloud as you gradually show them on the screen. Have the student say the word at least twice. It is not necessary to provide definitions. Continue in the same fashion with different students until all the words have been practiced.</p>
+											</li>
+										</ol>
+										<p><span  class="highlight"> Words</span></p>
+										<table style="width: 300px">
+											<tr>
+												<td><img src="CC/CC-16.png" alt="Image 16" class="iconcc"></td>
+												<td>eight</td>
+												<td><img src="CC/CC-16.png" alt="Image 16" class="iconcc"> <img src="CC/CC-25.png" alt="Image 29" class="iconcc"></td>
+											</tr>
+											<tr>
+												<td><img src="CC/CC-17.png" alt="Image 17" class="iconcc"></td>
+												<td>own</td>
+												<td><img src="CC/CC-17.png" alt="Image 17" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+											</tr>
+											<tr>
+												<td><img src="CC/CC-24.png" alt="Image 24" class="iconcc"></td>
+												<td>pine</td>
+												<td><img src="CC/CC-24.png" alt="Image 24" class="iconcc"> <img src="CC/CC-15.png" alt="Image 15" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+											</tr>
+											<tr>
+												<td><img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+												<td>tone</td>
+												<td><img src="CC/CC-25.png" alt="Image 24" class="iconcc"> <img src="CC/CC-17.png" alt="Image 17" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+											</tr>
+											<tr>
+												<td><img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+												<td>main</td>
+												<td><img src="CC/CC-29.png" alt="Image 29" class="iconcc"> <img src="CC/CC-16.png" alt="Image 16" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+											</tr>
+											<tr>
+												<td><img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+												<td>night</td>
+												<td><img src="CC/CC-30.png" alt="Image 30" class="iconcc"> <img src="CC/CC-15.png" alt="Image 15" class="iconcc"> <img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+											</tr>
+										</table><br>
+									</div>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 5. Teach seven more sounds: <img src="CC/CC-01.png" alt="Image 01" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-03.png" alt="Image 03" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-11.png" alt="Image 11" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-27.png" alt="Image 27" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-26.png" alt="Image 26" class="iconcc" style="margin-bottom: -3px;;">, <img src="CC/CC-37.png" alt="Image 37" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-39.png" alt="Image 39" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<ol class="steps-list">
+										<li>
+											<p>a. Show the icon of the first sound and say it. Make sure all students are able to see how you articulate the sound.</p>
+										</li>
+										<li>
+											<p>b. Select a student and ask him/her to say the sound out loud.</p>
+										</li>
+										<li>
+											<p>c. Spell out the word provided for the sound taught so that the students learn to link the sounds. Select one student and have him/her join the sounds aloud as you gradually show them on the screen. Have the student say the word at least twice. It is not necessary to provide definitions.</p>
+										</li>
+										<li>
+											<p>d. Continue in the same fashion with the rest of the sounds specified in this section.</p>
+										</li>
+									</ol>
+									<div class="answer">
+										<p><span  class="highlight"> Words</span></p>
+										<table style="width: 300px">
+										<tr>
+											<td><img src="CC/CC-01.png" alt="Image 01" class="iconcc"></td>
+											<td>ant</td>
+											<td><img src="CC/CC-01.png" alt="Image 01" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"> <img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-03.png" alt="Image 03" class="iconcc"></td>
+											<td>in</td>
+											<td><img src="CC/CC-03.png" alt="Image 03" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-11.png" alt="Image 11" class="iconcc"></td>
+											<td>team</td>
+											<td><img src="CC/CC-25.png" alt="Image 25" class="iconcc"> <img src="CC/CC-11.png" alt="Image 11" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-27.png" alt="Image 27" class="iconcc"></td>
+											<td>same</td>
+											<td><img src="CC/CC-27.png" alt="Image 27" class="iconcc"> <img src="CC/CC-16.png" alt="Image 16" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-26.png" alt="Image 26" class="iconcc"></td>
+											<td>zone</td>
+											<td><img src="CC/CC-26.png" alt="Image 26" class="iconcc"> <img src="CC/CC-17.png" alt="Image 17" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-37.png" alt="Image 37" class="iconcc"></td>
+											<td>lime</td>
+											<td><img src="CC/CC-37.png" alt="Image 37" class="iconcc"> <img src="CC/CC-15.png" alt="Image 15" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+										</tr>
+										<tr>
+											<td><img src="CC/CC-39.png" alt="Image 39" class="iconcc"></td>
+											<td>cat</td>
+											<td><img src="CC/CC-39.png" alt="Image 39" class="iconcc"> <img src="CC/CC-01.png" alt="Image 01" class="iconcc"> <img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+										</tr>
+									</table><br>
+									</div>
+                                </li>
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 6. Help students practice sound blending by reading whole words formed from a slot machine-style display.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+                                    <ol class="steps-list">
+										<li>
+											<p>a. Share the slot machine on the screen.</p>
+										</li>
+										<li>
+											<p>b. Select a student.</p>
+										</li>
+										<li>
+											<p>c. Activate the slot machine so it randomly stops on three sounds.</p>
+										</li>
+										<li>
+											<p>d. Have the student connect the sounds and say the word aloud.</p>
+										</li>
+										<li>
+											<p>e. Once the word is pronounced correctly, click on the button on the left to move forward on the bar.</p>
+										</li>
+										<li>
+											<p>f. Repeat the same procedure with four more students.</p>
+										</li>
+									</ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- Steps of the method -->
+                <div class="content">
+                    <h2>Part 2</h2>
+					<div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Teach seven more sounds: <img src="CC/CC-10.png" alt="Image 10" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-13.png" alt="Image 13" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-14.png" alt="Image 14" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-33.png" alt="Image 33" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-40.png" alt="Image 40" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-15.png" alt="Image 05" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-43.png" alt="Image 43" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<div class="answer">
+										<ol class="steps-list">
+											<li>
+												<p>a. Show the icon of the first sound and say it. Make sure all students are able to see how you articulate the sound.</p>
+											</li>
+											<li>
+												<p>b. Select a student and ask him/her to say the sound out loud.</p>
+											</li>
+											<li>
+												<p>c. Spell out the word provided for the sound taught so that the students learn to link the sounds. Select one student and have him/her join the sounds aloud as you gradually show them on the screen. Have the student say the word at least twice. It is not necessary to provide definitions.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with the rest of the sounds specified in the section.</p>
+											</li>
+										</ol>
+										<p><span  class="highlight"> Words</span></p>
+											<table style="width: 300px">
+												<tr>
+													<td><img src="CC/CC-10.png" alt="Image 10" class="iconcc"></td>
+													<td>moon</td>
+													<td><img src="CC/CC-29.png" alt="Image 29" class="iconcc"> <img src="CC/CC-10.png" alt="Image 10" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-13.png" alt="Image 13" class="iconcc"></td>
+													<td>pull</td>
+													<td><img src="CC/CC-24.png" alt="Image 24" class="iconcc"> <img src="CC/CC-13.png" alt="Image 13" class="iconcc"> <img src="CC/CC-37.png" alt="Image 37" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-14.png" alt="Image 14" class="iconcc"></td>
+													<td>on</td>
+													<td><img src="CC/CC-14.png" alt="Image 14" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-33.png" alt="Image 33" class="iconcc"></td>
+													<td>dime</td>
+													<td><img src="CC/CC-33.png" alt="Image 33" class="iconcc"> <img src="CC/CC-15.png" alt="Image 15" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+													<td>room</td>
+													<td><img src="CC/CC-40.png" alt="Image 40" class="iconcc"> <img src="CC/CC-10.png" alt="Image 10" class="iconcc"> <img src="CC/CC-29.png" alt="Image 29" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-43.png" alt="Image 43" class="iconcc"></td>
+													<td>good</td>
+													<td><img src="CC/CC-43.png" alt="Image 43" class="iconcc"> <img src="CC/CC-13.png" alt="Image 13" class="iconcc"> <img src="CC/CC-33.png" alt="Image 33" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-49.png" alt="Image 49" class="iconcc"></td>
+													<td>jeep</td>
+													<td><img src="CC/CC-49.png" alt="Image 49" class="iconcc"> <img src="CC/CC-11.png" alt="Image 11" class="iconcc"> <img src="CC/CC-24.png" alt="Image 24" class="iconcc"></td>
+												</tr>
+											</table><br>
+
+									</div>
+                                </li>                               
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Help students practice sound blending by reading whole words formed from a slot machine-style display.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Keep students motivated by showing them the score bar as they earn points throughout the lesson.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Share the slot machine on the screen.</p>
+											</li>
+											<li>
+												<p>b. Select a student.</p>
+											</li>
+											<li>
+												<p>c. Activate the slot machine so it randomly stops on three or four sounds.</p>
+											</li>
+											<li>
+												<p>d. Have the student connect the sounds and say the word aloud. </p>
+											</li>
+											<li>
+												<p>e. Once the word is pronounced correctly, click on the button on the left to move forward on the bar.</p>
+											</li>
+											<li>
+												<p>f. Repeat the same procedure with four more students. </p>
+											</li>
+										</ol><br>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+				<!-- Steps of the method -->
+                <div class="content">
+                    <h2>Part 3</h2><br>
+                    <div class="accordion">
+                        <div class="accordion-text">
+                            <ul class="faq-text">
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 1. Teach seven more sounds: <img src="CC/CC-02.png" alt="Image 02" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-04.png" alt="Image 04" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-06.png" alt="Image 06" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-08.png" alt="Image 08" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">-<img src="CC/CC-40.png" alt="Image 40" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-09.png" alt="Image 09" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">-<img src="CC/CC-40.png" alt="Image 40" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-12.png" alt="Image 12" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">-<img src="CC/CC-40.png" alt="Image 40" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">, <img src="CC/CC-18.png" alt="Image 18" class="iconcc" style="margin-bottom: -3px; margin-right: 1px;">.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                    <span class="line"></span>
+									<div class="answer">
+										<ol class="steps-list">
+											<li>
+												<p>a. Show the icon of the first sound and say it. Make sure all students are able to see how you articulate the sound.</p>
+											</li>
+											<li>
+												<p>b. Select a student and ask him/her to say the sound out loud.</p>
+											</li>
+											<li>
+												<p>c. Spell out the word provided for the sound taught so that the students learn to link the sounds. Select one student and have him/her join the sounds aloud as you gradually show them on the screen. Have the student say the word at least twice. It is not necessary to provide definitions.</p>
+											</li>
+											<li>
+												<p>d. Continue in the same fashion with the rest of the sounds specified in the section.</p>
+											</li>
+										</ol>
+										<p><span  class="highlight"> Words</span></p>
+
+											<table style="width: 300px">
+												<tr>
+													<td><img src="CC/CC-02.png" alt="Image 02" class="iconcc"></td>
+													<td>up</td>
+													<td><img src="CC/CC-02.png" alt="Image 02" class="iconcc"> <img src="CC/CC-24.png" alt="Image 24" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-04.png" alt="Image 04" class="iconcc"></td>
+													<td>end</td>
+													<td><img src="CC/CC-04.png" alt="Image 04" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"> <img src="CC/CC-33.png" alt="Image 33" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-06.png" alt="Image 06" class="iconcc"></td>
+													<td>alone</td>
+													<td><img src="CC/CC-06.png" alt="Image 06" class="iconcc"> <img src="CC/CC-37.png" alt="Image 37" class="iconcc"> <img src="CC/CC-17.png" alt="Image 17" class="iconcc"> <img src="CC/CC-30.png" alt="Image 30" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-08.png" alt="Image 08" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+													<td>near</td>
+													<td><img src="CC/CC-30.png" alt="Image 30" class="iconcc"> <img src="CC/CC-08.png" alt="Image 08" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-09.png" alt="Image 09" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+													<td>art</td>
+													<td><img src="CC/CC-09.png" alt="Image 09" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"> <img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-12.png" alt="Image 12" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+													<td>care</td>
+													<td><img src="CC/CC-39.png" alt="Image 39" class="iconcc"> <img src="CC/CC-12.png" alt="Image 12" class="iconcc"> <img src="CC/CC-40.png" alt="Image 40" class="iconcc"></td>
+												</tr>
+												<tr>
+													<td><img src="CC/CC-18.png" alt="Image 18" class="iconcc"></td>
+													<td>mute</td>
+													<td><img src="CC/CC-29.png" alt="Image 29" class="iconcc"> <img src="CC/CC-18.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 25" class="iconcc"></td>
+												</tr>
+											</table><br>
+
+									</div>
+                                </li>                               
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 2. Help students practice sound blending by reading whole words formed from a slot machine-style display.</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>Keep students motivated by showing them the score bar as they earn points throughout the lesson.</p>
+										<ol class="steps-list">
+											<li>
+												<p>a. Share the slot machine on the screen.</p>
+											</li>
+											<li>
+												<p>b. Select a student.</p>
+											</li>
+											<li>
+												<p>c. Activate the slot machine so it randomly stops on four or five sounds.</p>
+											</li>
+											<li>
+												<p>d. Have the student connect the sounds and say the word aloud.</p>
+											</li>
+											<li>
+												<p>e. Once the word is pronounced correctly, click on the button on the left to move forward on the bar.</p>
+											</li>
+											<li>
+												<p>f. Repeat the same procedure with as many students as class time allows.</p>
+											</li>
+										</ol>
+                                </li>                               
+                                <li>
+                                    <div class="question-arrow">
+                                        <span class="question">Step 3. Closing</span>
+                                        <i class="bx bxs-chevron-down arrow"></i>
+                                    </div>
+                                        <span class="line"></span>
+										<p>To close today’s activity, thank students for their participation. Let them know that in the next session, they will begin working with their first dialogue, and encourage them to log in on time. You may use the following speech:</p>
+										<p><i>Aquí llegamos al final de nuestra primera lección. El día de hoy aprendiste a pronunciar y conectar 28 sonidos de la tabla de colores. ¡Muchas felicidades, porque a partir de hoy ya hablas inglés!</i></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Función para manejar el cambio de pestañas
+    function handleTabChange(event) {
+        const selectedRadio = event.target; // Pestaña seleccionada
+        const navIndicator = document.querySelector('nav::before'); // Indicador de navegación
+        
+        // Ajustar la posición de la barra de navegación según la pestaña seleccionada
+        if (selectedRadio.id === 'steps') {
+            navIndicator.style.left = '0';
+        } else if (selectedRadio.id === 'seg1') {
+            navIndicator.style.left = '20%';
+        } else if (selectedRadio.id === 'seg2') {
+            navIndicator.style.left = '40%';
+        }
+        
+        // Actualizar la posición de contenido
+        const contentBox = document.querySelector('.content-box');
+        if (selectedRadio.id === 'steps') {
+            contentBox.style.left = '0';
+        } else if (selectedRadio.id === 'seg1') {
+            contentBox.style.left = '-100%';
+        } else if (selectedRadio.id === 'seg2') {
+            contentBox.style.left = '-200%';
+        } 
+    }
+
+    // Manejar el cambio de pestañas
+    const radioButtons = document.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', handleTabChange);
+    });
+
+// Manejo de acordeón
+function adjustContainerHeight() {
+    const container = document.querySelector('.container');
+    
+    // Obtener la altura de la ventana (viewport)
+    const viewportHeight = window.innerHeight; 
+    
+    // Ajustar la altura mínima basada en el tamaño del viewport
+    let totalHeight;
+
+    // Definir diferentes alturas según el ancho de la pantalla
+    if (window.innerWidth < 600) {
+        // Para pantallas pequeñas (móviles), ajustar más
+        totalHeight = viewportHeight * 1.9; // Por ejemplo, 120% del viewport para móviles
+    } else if (window.innerWidth < 2024) {
+        // Para pantallas medianas (tablets)
+        totalHeight = viewportHeight * 1.6; // 150% del viewport
+    } else {
+        // Para pantallas grandes (desktops)
+        totalHeight = viewportHeight * 1.3; // 190% del viewport
+    }
+    
+    // Añadir altura de acordeones abiertos
+    const openAccordions = document.querySelectorAll('.accordion-content2[style*="display: block"]');
+    openAccordions.forEach(accordion => {
+        totalHeight += accordion.scrollHeight; // Añadir altura dinámica en píxeles
+    });
+
+    // Ajustar el min-height del contenedor dinámicamente
+    container.style.minHeight = `${totalHeight}px`;
+}
+
+// Escuchar cambios en el tamaño de la ventana para hacerlo responsivo
+window.addEventListener('resize', adjustContainerHeight);
+
+// Ejecutar al cargar la página
+adjustContainerHeight();
+
+
+
+// Manejo del acordeón en la lista (solo un acordeón abierto a la vez)
+const accordionItems = document.querySelectorAll('.accordion-text li');
+accordionItems.forEach(item => {
+    item.addEventListener('click', function () {
+        const isOpen = this.classList.contains('showAnswer'); // Verifica si ya está abierto
+        
+        // Cerrar todos los acordeones
+        accordionItems.forEach(i => i.classList.remove('showAnswer'));
+        
+        // Si el acordeón no estaba abierto, abrirlo
+        if (!isOpen) {
+            this.classList.add('showAnswer');
+        }
+    });
+});
+
+    // Manejo del acordeón en los elementos
+    const accordionItems2 = document.querySelectorAll('.accordion-item2');
+    accordionItems2.forEach(item => {
+        const header = item.querySelector('.accordion-header2');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content2');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active2');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+	// Manejo del acordeón en los elementos
+    const accordionItems3 = document.querySelectorAll('.accordion-item');
+    accordionItems3.forEach(item => {
+        const header = item.querySelector('.accordion-header');
+        header.addEventListener('click', function () {
+            const content = item.querySelector('.accordion-content');
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            header.classList.toggle('active');
+            
+            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+            adjustContainerHeight();
+        });
+    });
+
+    // Inicializar altura del contenedor al cargar
+    adjustContainerHeight();
+});
+</script>
+</body>
+</html>
