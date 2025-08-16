@@ -387,9 +387,10 @@ label.field select.select {
 
   // Helper: arma la URL final SOLO con la lección
 	function buildLessonFileURL(levelNumber, lessonNumber) {
-	  // Carpeta = nivel + lección, archivo siempre lesson-1.html
-	  const folderName = `${levelNumber}${lessonNumber}`;
-	  return `levels/${folderName}/lesson-1.html`;
+	  // carpeta = número de la lección
+	  const folderName = lessonNumber;
+	  // archivo = lesson-{lessonNumber}.html
+	  return `levels/${folderName}/lesson-${lessonNumber}.html`;
 	}
 
   // Cambia el thumbnail al seleccionar nivel
