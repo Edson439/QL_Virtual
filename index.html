@@ -374,10 +374,8 @@ label.field select.select {
   // ============= CONFIGURACIÓN RÁPIDA =============
   const WELCOME_IMG = 'assets/img/welcome.jpg';
 
-  // Carpeta base (sin %20; encodeURI se encarga de codificar espacios)
-  const BASE_PATH = 'file:///Volumes/Disco Solido/Edson 2025/Virtual 45/incio/1A';
   // ================================================
-
+  const BASE_PATH = '.'; 
   const levelSel   = document.getElementById('level');
   const lessonSel  = document.getElementById('lesson');
   const previewImg = document.getElementById('previewImg');
@@ -388,10 +386,10 @@ label.field select.select {
   let currentLesson = '';
 
   // Helper: arma la URL final SOLO con la lección
-  function buildLessonFileURL(lessonNumber){
-    const raw = `${BASE_PATH}/levels/${lessonNumber}/lesson-${lessonNumber}.html`;
-    return encodeURI(raw);
-  }
+	function buildLessonFileURL(levelNumber, lessonNumber){
+	  // ejemplo: levels/1/lesson-1.html
+	  return `levels/${levelNumber}/lesson-${lessonNumber}.html`;
+	}
 
   // Cambia el thumbnail al seleccionar nivel
   levelSel.addEventListener('change', () => {
@@ -423,11 +421,11 @@ label.field select.select {
   }
 
   // Navegación
-  startBtn.addEventListener('click', () => {
-    if (startBtn.disabled) return;
-    const url = buildLessonFileURL(currentLesson);
-    window.location.href = url;
-  });
+	startBtn.addEventListener('click', () => {
+	  if (startBtn.disabled) return;
+	  const url = buildLessonFileURL(currentLevel, currentLesson);
+	  window.location.href = url;   // ← ahora apunta dentro de GitHub Pages
+	});
 
   // Estado inicial
   function init(){
