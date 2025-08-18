@@ -169,14 +169,13 @@
   }
 	
 	.start .material-icons-round,
-.start .fa-rocket {
-  font-size: 20px;
-  color: white;
-}
-	.material-icons-round {
-  font-size: 32px;
-}
-	
+	.start .fa-rocket {
+	  font-size: 20px;
+	  color: white;
+	}
+		.material-icons-round {
+	  font-size: 32px;
+	}
 	
 	
 	
@@ -311,6 +310,19 @@ label.field select.select {
   pointer-events: none !important;
   font-weight: 400 !important;
 }
+	
+/* Logout */
+.logout {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -407,10 +419,14 @@ label.field select.select {
     <!-- Start -->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
 
-<button id="startBtn" class="start" disabled>
-  <span class="material-icons-round">rocket_launch</span>
-  START
-</button>
+	<button id="startBtn" class="start" disabled>
+	  <span class="material-icons-round">rocket_launch</span>
+	  START
+	</button>
+	  
+	  <button class="logout" onclick="window.location.href='login.html'">
+	  <i class="fa-solid fa-right-from-bracket"></i> Logout
+	</button>
   </main>
 
 <script>
