@@ -21,45 +21,45 @@
       <div class="menu-top">
         <button class="hamburger toggle-sidebar"><i class="fas fa-bars"></i></button>
       </div>
-	<nav class="menu">
-		<span class="section-title">Class</span>
-		
-	  <a href="#" class="menu-item active" id="menuProps">
-		<img src="images/icons-09.png" alt="Props icon" class="icon">
-		<span>Warm up</span>
-	  </a>
-	  <a href="#" class="menu-item active" id="menuFilm">
-		<i class="material-icons">movie_creation</i>
-		<span>Dialogue</span>
-	  </a>
-	  <a href="#" class="menu-item" id="menuVocabulary">
-		<img src="images/icons-03.png" alt="Vocabulary icon" class="icon">
-		<span>Vocabulary</span>
-	  </a>
-	  <a href="#" class="menu-item" id="menuPractice">
-		<img src="images/icons-08.png" alt="Practice icon" class="icon">
-		<span>Practice</span>
-	  </a>
-	  <a href="#" class="menu-item" id="menuStudent">
-		<img src="images/icons-05.png" alt="Student icon" class="icon">
-		<span>Challenge</span>
-	  </a>
-		<hr>
-		<span class="section-title" style="margin-top: 20px;">Tools</span>
-	  <a href="#" class="menu-item" id="menuColorChart">
-		<img src="images/icons-02.png" alt="Color Chart icon" class="icon">
-		<span>Color Chart</span>
-	  </a>
-	  <a href="#" class="menu-item" id="menuWhiteboard">
-		<img src="images/icons-04.png" alt="Whiteboard icon" class="icon">
-		<span>Whiteboard</span>
-	  </a>
+		<nav class="menu">
+			<span class="section-title">Class</span>
 
-	  <a href="manual.html" target="_blank" class="menu-item" id="menuManual">
-		<img src="images/icons-07.png" alt="Manual icon" class="icon">
-		<span>Manual</span>
-	  </a>
-	</nav>
+		  <a href="#" class="menu-item active" id="menuProps">
+			<img src="images/icons-09.png" alt="Props icon" class="icon">
+			<span>Warm up</span>
+		  </a>
+		  <a href="#" class="menu-item active" id="menuFilm">
+			<i class="material-icons">movie_creation</i>
+			<span>Dialogue</span>
+		  </a>
+		  <a href="#" class="menu-item" id="menuVocabulary">
+			<img src="images/icons-03.png" alt="Vocabulary icon" class="icon">
+			<span>Vocabulary</span>
+		  </a>
+		  <a href="#" class="menu-item" id="menuPractice">
+			<img src="images/icons-08.png" alt="Practice icon" class="icon">
+			<span>Practice</span>
+		  </a>
+		  <a href="#" class="menu-item" id="menuStudent">
+			<img src="images/icons-05.png" alt="Student icon" class="icon">
+			<span>Challenge</span>
+		  </a>
+			<hr>
+			<span class="section-title" style="margin-top: 20px;">Tools</span>
+		  <a href="#" class="menu-item" id="menuColorChart">
+			<img src="images/icons-02.png" alt="Color Chart icon" class="icon">
+			<span>Color Chart</span>
+		  </a>
+		  <a href="#" class="menu-item" id="menuWhiteboard">
+			<img src="images/icons-04.png" alt="Whiteboard icon" class="icon">
+			<span>Whiteboard</span>
+		  </a>
+
+		  <a href="manual.html" target="_blank" class="menu-item" id="menuManual">
+			<img src="images/icons-07.png" alt="Manual icon" class="icon">
+			<span>Manual</span>
+		  </a>
+		</nav>
 
     </aside>
 
@@ -124,8 +124,8 @@
 				    <div class="containermov">
 						<div class="group-left">
 							<div class="circle" onclick="toggleImage(this)" data-index="0" data-reveal="0"><img src="CC/CC-31.png" alt="Imagen 1"></div>
-							<div class="circle" onclick="toggleImage(this)" data-index="1" data-reveal="1"><img src="CC/CC-07.png" alt="Imagen 2"></div>
-							<div class="circle" onclick="toggleImage(this)" data-index="2" data-reveal="2"><img src="CC/CC-40.png" alt="Imagen 3"></div>
+							<div class="circle" onclick="toggleImage(this)" data-index="1" data-reveal="1,2"><img src="CC/CC-07.png" alt="Imagen 2"></div>
+							<div class="circle" onclick="toggleImage(this)" data-index="2" data-reveal="1,2"><img src="CC/CC-40.png" alt="Imagen 3"></div>
 							<div class="circle" onclick="toggleImage(this)" data-index="3" data-reveal="3"><img src="CC/CC-27.png" alt="Imagen 4"></div>
 							<div class="circle" onclick="toggleImage(this)" data-index="4" data-reveal="4"><img src="CC/CC-25.png" alt="Imagen 5"></div>
 						</div>
@@ -341,8 +341,8 @@
 				    <div class="containermov">
 						<div class="group-left">
 							<div class="circle" onclick="toggleImage(this)" data-index="0" data-reveal="0"><img src="CC/CC-41.png" alt="Imagen 1"></div>
-							<div class="circle" onclick="toggleImage(this)" data-index="1" data-reveal="1"><img src="CC/CC-14.png" alt="Imagen 2"></div>
-							<div class="circle" onclick="toggleImage(this)" data-index="2" data-reveal="2"><img src="CC/CC-40.png" alt="Imagen 3"></div>
+							<div class="circle" onclick="toggleImage(this)" data-index="1" data-reveal="1,2"><img src="CC/CC-14.png" alt="Imagen 2"></div>
+							<div class="circle" onclick="toggleImage(this)" data-index="2" data-reveal="1,2"><img src="CC/CC-40.png" alt="Imagen 3"></div>
 							<div class="circle" onclick="toggleImage(this)" data-index="3" data-reveal="3"><img src="CC/CC-33.png" alt="Imagen 4"></div>
 						</div>
 						<div class="group-center">
@@ -553,7 +553,52 @@
 	</button>
 	</div>
   </div>
+	<script>
+	function setupStackedCircles() {
+	  // Recorre cada bloque de círculos por separado
+	  document.querySelectorAll('.vocab-card .group-left').forEach(container => {
+		const circles = Array.from(container.querySelectorAll('.circle'));
+		const groups = {};
 
+		// Agrupa SOLO dentro de este container por el mismo data-reveal con coma
+		circles.forEach(el => {
+		  const key = (el.dataset.reveal || '').replace(/\s+/g,'');
+		  if (key.includes(',')) (groups[key] ||= []).push(el);
+		});
+
+		// Aplica stacking dentro de este container
+		Object.values(groups).forEach(arr => {
+		  // limpia estilos previos
+		  arr.forEach(c => {
+			c.classList.remove('stack-front','stack-back');
+			c.style.marginRight = '';
+			c.style.marginLeft  = '';
+			c.style.zIndex      = '';
+		  });
+
+		  if (arr.length >= 2) {
+			// primero al frente
+			arr[0].classList.add('stack-front');
+
+			// siguientes atrás y empalmados
+			arr.slice(1).forEach((el, i) => {
+			  el.classList.add('stack-back');
+			  // usa el MISMO valor que en tu CSS (.stack-back { margin-left: -40px; })
+			  el.style.marginLeft = '-60px';
+			  el.style.zIndex = String(10 - i);
+			});
+
+			// deja el espacio normal después del último del grupo
+			const last = arr[arr.length - 1];
+			last.style.marginRight = '10px'; // ajusta si tu gap es otro
+		  }
+		});
+	  });
+	}
+
+	document.addEventListener('DOMContentLoaded', setupStackedCircles);
+	// si cambias dinámicamente el contenido, vuelve a llamar setupStackedCircles();
+	</script>
 	<script src="scripts.js"></script>
 	<script src="whiteboard.js"></script>
 	<script src="colorchart.js"></script>
