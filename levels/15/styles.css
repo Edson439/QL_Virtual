@@ -755,6 +755,12 @@ hr {
   font-size: 14px;
 }
 
+/* --- Stacking de círculos empalmados --- */
+.circle { position: relative; }           /* permite z-index */
+.circle.stack-front { z-index: 20; }      /* el primero va al frente */
+.circle.stack-back  { z-index: 10; }      /* los siguientes atrás */
+.circle.stack-back { margin-left: -40px;} /* empalme; ajusta -30/-50 si quieres */
+
 @media (max-width: 800px) {
   .dots {
     left: 20px;
