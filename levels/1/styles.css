@@ -646,6 +646,55 @@ hr {
   font-size: 14px;
 }
 
+/* Empalme para iconos pequeños en la barra inferior */
+.group-down .stack-group{
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  isolation: isolate;    /* respeta z-index dentro del grupo */
+  margin-right: 20px;    /* mismo espacio que ya usas entre iconos */
+}
+
+.group-down .stack-group > img:first-child{
+  position: relative;
+  z-index: 2;            /* el primero al frente */
+}
+
+.group-down .stack-group > img + img{
+  position: relative;
+  z-index: 1;            /* el segundo atrás */
+  margin-left: -19px;    /* solape; si quieres más usa -22/-24 */
+}
+
+
+/* --- Empalme horizontal de pares (8-40, 9-40, 12-40) --- */
+.stack-group {
+  display: inline-block;
+  position: relative;
+  margin-right: 20px;   /* espacio con el siguiente grupo */
+}
+
+.stack-group img {
+  position: relative;
+  margin-right: 0;
+}
+
+.stack-group img:first-child {
+  z-index: 2;   /* El primero al frente */
+}
+
+.stack-group img:last-child {
+  margin-left: -75px;  /* solape */
+  z-index: 1;          /* El segundo atrás */
+}
+
+
+
+/* --- Stacking de círculos empalmados --- */
+.circle { position: relative; }           /* permite z-index */
+.circle.stack-front { z-index: 20; }      /* el primero va al frente */
+.circle.stack-back  { z-index: 10; }      /* los siguientes atrás */
+.circle.stack-back { margin-left: -40px;} /* empalme; ajusta -30/-50 si quieres */
 
 @media (max-width: 800px) {
   .dots {
