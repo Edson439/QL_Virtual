@@ -11,7 +11,7 @@ const arrowDown = document.querySelector('.arrow.down');
 const playBtn = document.getElementById('customPlayBtn');
 const video = document.getElementById('mainVideo');
 
-// Función para cambiar el video con transición estilo Shorts
+// FunciÃ³n para cambiar el video con transiciÃ³n estilo Shorts
 
 function changeVideo(index, direction = 'down') {
   if (index >= 0 && index < videos.length) {
@@ -29,7 +29,7 @@ arrowUp.addEventListener('click', () => {
 
   if (section === 'film') {
     if (currentIndex > 0) {
-      changeVideo(currentIndex - 1, 'up'); // ? cambio aquí
+      changeVideo(currentIndex - 1, 'up'); // ? cambio aquÃ­
     }
   } else if (sectionCards[section]) {
     const sec = sectionCards[section];
@@ -301,12 +301,12 @@ toggleSoundBtn.addEventListener('click', () => {
   icon.textContent = isSoundActive ? 'volume_up' : 'volume_off';
 });
 
-// Escucha solo los íconos en el Color Chart
+// Escucha solo los Ã­conos en el Color Chart
 document.querySelectorAll('#colorChartContent .chart-icon').forEach(icon => {
   icon.addEventListener('click', () => {
     const colorChart = document.getElementById('colorChartContent');
     if (colorChart.style.display !== 'none') {
-      if (!isSoundActive) return; // No hace nada si el sonido está apagado
+      if (!isSoundActive) return; // No hace nada si el sonido estÃ¡ apagado
 
       const soundNumber = icon.getAttribute('data-sound').padStart(2, '0');
       const audio = new Audio(`CC/sounds/CC${soundNumber}.mp3`);
@@ -317,4 +317,5 @@ document.querySelectorAll('#colorChartContent .chart-icon').forEach(icon => {
 
 document.addEventListener('DOMContentLoaded', () => {
   showSection('practice');
+	
 });
