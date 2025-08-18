@@ -275,10 +275,10 @@ label.field select.select {
   color:#9aa1a9 !important;
   font-weight:500 !important;
 }
-/* Niveles siempre en azul */
-.ss-content .ss-option:not(:first-child){
-  color:var(--brand) !important;
-  font-weight:600 !important;
+/* Nivel normal (azul) SOLO si NO está deshabilitado */
+.ss-content .ss-option:not(:first-child):not([aria-disabled="true"]):not(.ss-disabled){
+  color: var(--brand) !important;
+  font-weight: 600 !important;
 }
 /* Hover / seleccionado en azul claro */
 .ss-content .ss-option:hover,
@@ -301,6 +301,16 @@ label.field select.select {
 .ss-content .ss-list .ss-option:first-child{
   border-bottom: 1px solid #e6eefc !important;
 }
+	
+/* Niveles deshabilitados -> grises */
+.ss-content .ss-option[aria-disabled="true"],
+.ss-content .ss-option.ss-disabled {
+  color: #bbb !important;
+  background: #f5f5f5 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  font-weight: 400 !important;
+}
 </style>
 </head>
 <body>
@@ -321,43 +331,78 @@ label.field select.select {
 
     <div class="row" aria-label="selectors">
       <!-- LEVEL -->
-      <label class="field" for="level">
-        <select id="level" class="select placeholder">
-          <option value="" selected disabled>Choose a Level</option>
-          <!-- Levels 1..17 -->
-          <option value="1">LEVEL 1</option>
-          <option value="2">LEVEL 2</option>
-          <option value="3">LEVEL 3</option>
-          <option value="4">LEVEL 4</option>
-          <option value="5">LEVEL 5</option>
-          <option value="6">LEVEL 6</option>
-          <option value="7">LEVEL 7</option>
-          <option value="8">LEVEL 8</option>
-          <option value="9">LEVEL 9</option>
-          <option value="10">LEVEL 10</option>
-          <option value="11">LEVEL 11</option>
-          <option value="12">LEVEL 12</option>
-          <option value="13">LEVEL 13</option>
-          <option value="14">LEVEL 14</option>
-          <option value="15">LEVEL 15</option>
-          <option value="16">LEVEL 16</option>
-          <option value="17">LEVEL 17</option>
-        </select>
+	<label class="field" for="level">
+	  <select id="level" class="select placeholder">
+		<option value="" selected disabled>Choose a Level</option>
+		<option value="1">LEVEL 1</option>
+		<option value="2"  disabled>LEVEL 2</option>
+		<option value="3"  disabled>LEVEL 3</option>
+		<option value="4"  disabled>LEVEL 4</option>
+		<option value="5"  disabled>LEVEL 5</option>
+		<option value="6"  disabled>LEVEL 6</option>
+		<option value="7"  disabled>LEVEL 7</option>
+		<option value="8"  disabled>LEVEL 8</option>
+		<option value="9"  disabled>LEVEL 9</option>
+		<option value="10" disabled>LEVEL 10</option>
+		<option value="11" disabled>LEVEL 11</option>
+		<option value="12" disabled>LEVEL 12</option>
+		<option value="13" disabled>LEVEL 13</option>
+		<option value="14" disabled>LEVEL 14</option>
+		<option value="15" disabled>LEVEL 15</option>
+		<option value="16" disabled>LEVEL 16</option>
+		<option value="17" disabled>LEVEL 17</option>
+	  </select>
+	</label>
 
-      </label>
 
       <!-- LESSON -->
       <label class="field" for="lesson">
-        <select id="lesson" class="select placeholder">
-          <option value="" selected disabled>Choose a Lesson</option>
-          <!-- Lessons 1..40 -->
-          <!-- (esto evita escribir 40 options a mano) -->
-          <script>
-            for(let i=1;i<=40;i++){
-              document.write(`<option value="${i}">LESSON ${i}</option>`);
-            }
-          </script>
-        </select>
+<label class="field" for="lesson">
+  <select id="lesson" class="select placeholder">
+    <option value="" selected disabled>Choose a Lesson</option>
+    <option value="1">LESSON 1</option>
+    <option value="2" disabled>LESSON 2</option>
+    <option value="3" disabled>LESSON 3</option>
+    <option value="4" disabled>LESSON 4</option>
+    <option value="5" disabled>LESSON 5</option>
+    <option value="6" disabled>LESSON 6</option>
+    <option value="7" disabled>LESSON 7</option>
+    <option value="8" disabled>LESSON 8</option>
+    <option value="9" disabled>LESSON 9</option>
+    <option value="10" disabled>LESSON 10</option>
+    <option value="11" disabled>LESSON 11</option>
+    <option value="12" disabled>LESSON 12</option>
+    <option value="13" disabled>LESSON 13</option>
+    <option value="14" disabled>LESSON 14</option>
+    <option value="15">LESSON 15</option>
+    <option value="16" disabled>LESSON 16</option>
+    <option value="17" disabled>LESSON 17</option>
+    <option value="18" disabled>LESSON 18</option>
+    <option value="19" disabled>LESSON 19</option>
+    <option value="20" disabled>LESSON 20</option>
+    <option value="21" disabled>LESSON 21</option>
+    <option value="22" disabled>LESSON 22</option>
+    <option value="23" disabled>LESSON 23</option>
+    <option value="24" disabled>LESSON 24</option>
+    <option value="25" disabled>LESSON 25</option>
+    <option value="26" disabled>LESSON 26</option>
+    <option value="27" disabled>LESSON 27</option>
+    <option value="28" disabled>LESSON 28</option>
+    <option value="29" disabled>LESSON 29</option>
+    <option value="30" disabled>LESSON 30</option>
+    <option value="31" disabled>LESSON 31</option>
+    <option value="32" disabled>LESSON 32</option>
+    <option value="33" disabled>LESSON 33</option>
+    <option value="34" disabled>LESSON 34</option>
+    <option value="35" disabled>LESSON 35</option>
+    <option value="36" disabled>LESSON 36</option>
+    <option value="37" disabled>LESSON 37</option>
+    <option value="38" disabled>LESSON 38</option>
+    <option value="39" disabled>LESSON 39</option>
+    <option value="40" disabled>LESSON 40</option>
+  </select>
+</label>
+
       </label>
     </div>
 
@@ -374,8 +419,10 @@ label.field select.select {
   // ============= CONFIGURACIÓN RÁPIDA =============
   const WELCOME_IMG = 'assets/img/welcome.jpg';
 
+  // Carpeta base (sin %20; encodeURI se encarga de codificar espacios)
+  const BASE_PATH = 'file:///Volumes/Disco Solido/Edson 2025/Virtual 45/incio/1A';
   // ================================================
-  const BASE_PATH = '.'; 
+
   const levelSel   = document.getElementById('level');
   const lessonSel  = document.getElementById('lesson');
   const previewImg = document.getElementById('previewImg');
@@ -386,12 +433,10 @@ label.field select.select {
   let currentLesson = '';
 
   // Helper: arma la URL final SOLO con la lección
-	function buildLessonFileURL(levelNumber, lessonNumber) {
-	  // carpeta = número de la lección
-	  const folderName = lessonNumber;
-	  // archivo = lesson-{lessonNumber}.html
-	  return `levels/${folderName}/lesson-${lessonNumber}.html`;
-	}
+  function buildLessonFileURL(lessonNumber){
+    const raw = `${BASE_PATH}/levels/${lessonNumber}/lesson-${lessonNumber}.html`;
+    return encodeURI(raw);
+  }
 
   // Cambia el thumbnail al seleccionar nivel
   levelSel.addEventListener('change', () => {
@@ -416,18 +461,26 @@ label.field select.select {
     updateButton();
   });
 
-  // Habilitar / deshabilitar botón
-  function updateButton(){
-    const ready = !!currentLevel && !!currentLesson;
-    startBtn.disabled = !ready;
-  }
+	// Habilitar / deshabilitar botón
+	function updateButton(){
+	  const level  = parseInt(currentLevel, 10);
+	  const lesson = parseInt(currentLesson, 10);
+
+	  // SOLO permitir Level 1 + Lesson 1 o Level 1 + Lesson 15
+	  const allowed =
+		(level === 1 && lesson === 1) ||
+		(level === 1 && lesson === 15);
+
+	  startBtn.disabled = !allowed;
+	}
+
 
   // Navegación
-	startBtn.addEventListener('click', () => {
-	  if (startBtn.disabled) return;
-	  const url = buildLessonFileURL(currentLevel, currentLesson);
-	  window.location.href = url;   // ← ahora apunta dentro de GitHub Pages
-	});
+  startBtn.addEventListener('click', () => {
+    if (startBtn.disabled) return;
+    const url = buildLessonFileURL(currentLesson);
+    window.location.href = url;
+  });
 
   // Estado inicial
   function init(){
