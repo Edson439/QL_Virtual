@@ -401,7 +401,16 @@
             position: relative;
             top: -6px; /* Ajusta este valor para subir o bajar el texto */
         }
+.example-image {
+  display: none;
+}
+		.accordion-text li .example-image {
+  display: none; /* Oculta por defecto */
+}
 
+.accordion-text li.showAnswer .example-image {
+  display: block; /* Muestra cuando el acordeón está abierto */
+}
         /* Media Queries for Responsiveness */
 		@media (max-width: 1260px) {
 				body {
@@ -1066,41 +1075,75 @@
 				<!-- Extra activities -->
 				<div class="content">
                     <h2>Extra activities</h2>
-					<br><p>If there is any extra time, you may have students engage in further speaking practice related to the contents of the lesson. Considering the students’ level and their ability to communicate ideas, you can have them perform any of the following activities: </p>
+					<br><p>If there is any extra time, you may have students engage in further speaking practice related to the contents of the lesson. Considering the students’ level and their ability to communicate ideas, you can have them perform any of the following activities:</p>
                     <div class="accordion">
 						<div class="accordion-text">
 							<ul class="faq-text">
 								<li>
 								<div class="question-arrow">
-								  <span class="question">Challenge.</span>
+								  <span class="question">Challenge</span>
 								  <i class="bx bxs-chevron-down arrow"></i>
 								</div>
 								  <span class="line"></span>
-								  <p>This activity is intended for the students to practice the elements of the lesson by themselves in a fun way. However, you may go over the activity in class and take advantage to help the students have further practice. </p>
+								  <p>This activity is intended for the students to practice the elements of the lesson by themselves in a fun way. However, you may go over the activity in class and take advantage to help the students have further practice. The objective is for students to listen to an audio, look at four pictures, and choose the one that matches what they hear.</p>
+								  <p>Choose a student and play the audio for the first item. Ask the student to answer by saying a, b, c, or d. Then click on the student’s answer. If it is correct, the platform will move to the next item. If it is wrong, the student can keep trying until the correct answer is chosen.</p>
 							  </li>
 								<li>
 								<div class="question-arrow">
-								  <span class="question">Role-play.</span>
+								  <span class="question">Role-play</span>
 								  <i class="bx bxs-chevron-down arrow"></i>
 								</div>
 								  <span class="line"></span>
-								  <p>Real life situations using new vocabulary and structures found in the lesson.</p>
+								  <p>This activity helps students to apply what they have learned in real life situations using new vocabulary and structures found in the lesson.</p>
+								  <p>Select two or three students and assign them a scenario. You may use one of the suggested scenarios from the lesson or create your own, as long as it supports the lesson objective. Have the students perform the role-play, and assist them with any new vocabulary they may need.</p>
+								  <p>Tell the students to begin a conversation by asking someone about their emotions. Model the following conversation aloud:</p>
+									<img src="images/L15_r.jpg" alt="Image 3" class="example-image">
+									
+								  <p><span class="highlight">Suggested scenarios:</span></p>
+								  <ol class="steps-list" style="margin-left: 20px;">
+									<li>
+										<p>- In the school corridor</p>
+									</li>
+									<li>
+										<p>- In front of the university entrance</p>
+									</li>
+									<li>
+										<p>- On a bench outside the sports facility</p>
+									</li>
+									<li>
+										<p>- Waiting for the driving licence course to start</p>
+									</li>
+									<li>
+										<p>- In the lobby, waiting for the karate class</p>
+									</li>
+								</ol>
 							  </li>
 						  		<li>
 									<div class="question-arrow">
-										<span class="question">Questions and answers.</span>
+										<span class="question">Suggested scenarios:</span>
 										<i class="bx bxs-chevron-down arrow"></i>
 									</div>
 									<span class="line"></span>
-									<p>This is a controlled activity that leads students to the vocabulary and structures considered in the objective of the lesson.</p>
+									<p>In this controlled activity, students can practice asking and answering questions using the target structure.</p>
+									<p>Select students in pairs, guiding them to take turns asking and answering questions while keeping the focus on the lesson objective. During the activity, you may provide support with vocabulary, correct errors and use the time to clarify any doubts that arise.</p>
+									<p>Tell the students to ask questions about other people by using descriptions related to their physical appearance. Model the following conversation aloud:</p>
+									<img src="images/L15_q.jpg" alt="Image 3" class="example-image">
+									
+									
+									
+									
+									
+									
+									
 								</li>
 								<li>
                                     <div class="question-arrow">
-                                        <span class="question">Conversation.</span>
+                                        <span class="question">Conversation</span>
                                         <i class="bx bxs-chevron-down arrow"></i>
                                     </div>
                                     <span class="line"></span>
-                                    <p>This activity can help students increase their vocabulary and be aware of how they can apply a concept to similar situations.</p>
+                                    <p>This activity helps students expand their vocabulary and see how the lesson concept can be applied to real-life situations. By connecting the topic to their own experiences, students practice using the target language in a more natural and meaningful way.</p>
+                                    <p>Begin with a short conversation on the lesson topic, modeling the target structure. Then, invite students to share their own examples or experiences related to the topic. Encourage them to use the new vocabulary and expressions from the lesson, asking follow-up questions to guide the exchange. Conclude by highlighting useful phrases and addressing any common mistakes.</p>
                                 </li>
 							</ul>
 						</div>
@@ -1240,6 +1283,14 @@
 		// Inicializar altura del contenedor al cargar
 		adjustContainerHeight();
 	});
+		
+		document.addEventListener('DOMContentLoaded', function () {
+		  const img = document.querySelector('#roleplay-img'); // selecciona tu imagen
+		  if (img) {
+			img.style.display = 'none'; // la oculta al cargar
+		  }
+		});
+
 	</script>
 	</body>
 </html>
