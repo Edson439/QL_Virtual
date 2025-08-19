@@ -20,7 +20,7 @@
             display: flex;
             align-items: flex-start;
             justify-content: center;
-            height: 100vh;
+            height: 100dvh;
             background: #f4f4f4;
         }
 		.header-bar {
@@ -61,7 +61,7 @@
         }
 		.container {
 			width: 100%;
-			min-height: 2020px; /*Medida de contenedor alto*/
+			min-height: auto; /*Medida de contenedor alto*/
 			position: relative;
 			overflow-x: hidden;
 			max-width: 1140px;
@@ -97,7 +97,7 @@
             justify-content: space-around;
             position: relative;
             padding: 20px 0;
-			font-size: 16px;
+			font-size: 14px;
         }
         nav::after {
             position: absolute;
@@ -112,7 +112,7 @@
             position: absolute;
             content: "";
             background: #293a7b;
-            width: 16.66%;
+            width: 14.28%;
             height: 5px;
             top: 58px;
             left: 0;
@@ -157,24 +157,27 @@
         }
 
 		#steps:checked ~ nav::before { left: 0; }
-        #warm:checked ~ nav::before { left: 16.66%; }
-        #seg1:checked ~ nav::before { left: 33.33%; }
-        #seg2:checked ~ nav::before { left: 49.99%; }
-        #seg3:checked ~ nav::before { left: 66.66%; }
-        #ext:checked ~ nav::before { left: 83.32%; }
+        #warm:checked ~ nav::before { left: 14.28%; }
+        #seg1:checked ~ nav::before { left: 28.56%; }
+        #seg2:checked ~ nav::before { left: 42.84%; }
+        #seg3:checked ~ nav::before { left: 57.12%; }
+        #seg4:checked ~ nav::before { left: 71.4%; }
+        #ext:checked ~ nav::before { left: 85.68%; }
 
         #steps:checked ~ .container .content-box { left: 0; }
         #warm:checked ~ .container .content-box { left: -100%; }
         #seg1:checked ~ .container .content-box { left: -200%; }
         #seg2:checked ~ .container .content-box { left: -300%; }
         #seg3:checked ~ .container .content-box { left: -400%; }
-        #ext:checked ~ .container .content-box { left: -500%; }
+        #seg4:checked ~ .container .content-box { left: -500%; }
+        #ext:checked ~ .container .content-box { left: -600%; }
 
         #steps:checked ~ nav label:nth-child(1),
         #warm:checked ~ nav label:nth-child(2),
         #seg1:checked ~ nav label:nth-child(3),
         #seg2:checked ~ nav label:nth-child(4),
-        #seg3:checked ~ nav label:nth-child(5) 
+        #seg3:checked ~ nav label:nth-child(5), 
+        #seg4:checked ~ nav label:nth-child(5), 
         #ext:checked ~ nav label:nth-child(6) {
             color: #293a7b;
         }
@@ -407,9 +410,9 @@
 				.wrapper {
 					max-width: 960px; /*Medida de contenedor*/
 				}
-				nav {
-					font-size: 16px;
-				}
+        nav {
+            padding: 0px 0;
+        }
 				.container {
 					max-width: 900px;
 					width: 960px;
@@ -467,23 +470,27 @@
 			/* Ajustes para mantener el indicador de navegación */
 			#steps:checked ~ nav::before {
 				left:0;
-				top: 18%; /* Ajusta el valor para que se alinee correctamente con el item activo */
+				top: 16%; /* Ajusta el valor para que se alinee correctamente con el item activo */
 			}
 			#warm:checked ~ nav::before {
 				left:0;
-				top: 34%;
+				top: 29%;
 			}
 			#seg1:checked ~ nav::before {
 				left:0;
-				top: 49%;
+				top: 42.5%;
 			}
 			#seg2:checked ~ nav::before {
 				left:0;
-				top: 65%;
+				top: 55.5%;
 			}
 			#seg3:checked ~ nav::before {
 				left:0;
-				top: 80%;
+				top: 69.5%;
+			}
+			#seg4:checked ~ nav::before {
+				left:0;
+				top: 82.5%;
 			}
 			#ext:checked ~ nav::before {
 				left:0;
@@ -648,13 +655,15 @@
         <input type="radio" name="slider" id="seg1">
         <input type="radio" name="slider" id="seg2">
         <input type="radio" name="slider" id="seg3">
+        <input type="radio" name="slider" id="seg4">
         <input type="radio" name="slider" id="ext">
         <nav>
             <label for="steps" class="steps">STEPS OF THE METHOD</label>
             <label for="warm" class="warm">WARM UP</label>
             <label for="seg1" class="seg1">DIALOGUE</label>
             <label for="seg2" class="seg2">VOCABULARY</label>
-            <label for="seg3" class="seg3">PRACTICE</label>
+            <label for="seg3" class="seg3">ROLE-PLAY</label>
+            <label for="seg4" class="seg4">PRACTICE</label>
             <label for="ext" class="ext">EXTRA ACTIVITIES</label>
         </nav>
         <div class="container">
@@ -927,141 +936,130 @@
 								</table>
 					</div>
                 </div>
-				<!-- Practice -->
+				<!-- Role-Play -->
                 <div class="content">
-                    <h2>Practice</h2>
+                    <h2>Role-Play</h2><br>
 					<!-- Acordeón para la sección de Dialogue -->
 					<div class="accordion2">
-					<!-- Acordeón para la sección de Ideas for real-life practice -->
-						<div class="accordion-item2">
-							<div class="accordion-header2">
-								Role-play <i class="fas fa-chevron-down"></i>
-							</div>
-							<div class="accordion-content2">
-								<p>Have students role-play different situations where they have to express different emotions in various settings. You may provide background images to make the activity feel more realistic and engaging.</p><br>
-								<p>Two friends are:</p><br>
-								<ul>
-								  <li style="margin-left: 35px;">At the airport ready to fly.</li>
-								  <li style="margin-left: 35px;">At an amusement park ready to take a roller coaster ride.</li>
-								  <li style="margin-left: 35px;">At school/in the office ready for their first day.</li>
-								  <li style="margin-left: 35px;">At school ready for a field trip.</li>
-								  <li style="margin-left: 35px;">In the office ready for a job interview.</li>
-								</ul>
-									
-								
-								<!-- Acordeón para la sección de Example -->
-								<br><h3>Example</h3>
-								<img src="images/10.jpg" alt="Image 3" class="example-image">
-							</div>
-						</div>
-						<div class="accordion-item2">
-							<div class="accordion-header2">
-								Interactive Practice <i class="fas fa-chevron-down"></i>
-							</div>
-							<div class="accordion-content2">
-								<p>This activity will be divided into two parts. First the students will learn vocabulary regarding emotions and then they will practice the emotions in a fun and interactive way.</p><br>
-								<p style="text-indent: -15px; margin-left: 15px;">1.</p><br>
-								<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will learn and practice vocabulary for emotions.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">b. Go over the first section of the Practice and show the first emoji on the screen.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">c. Have a student follow the color chart guide and pronounce the word. Follow the correction process.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">d. Demonstrate the emotion and help your students with any doubt they may have.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">e. Continue in the same fashion with the rest of the emotions.</p><br>
-								<table class="tabla-emotions" style="margin: 0 auto; text-align: center; max-width: 560px;">
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-01.png" alt="Image 3" class="iconcc"></td>
-										<td>nervous</td>
-										<td><img src="CC/CC-30.png" alt="Image 18" class="iconcc"> <img src="CC/CC-07.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-32.png" alt="Image 18" class="iconcc"> <img src="CC/CC-06.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-02.png" alt="Image 3" class="iconcc"></td>
-										<td>excited</td>
-										<td><img src="CC/CC-03.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-54.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-06.png" alt="Image 3" class="iconcc"></td>
-										<td>happy</td>
-										<td><img src="CC/CC-42.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-24.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-05.png" alt="Image 3" class="iconcc"></td>
-										<td>sad</td>
-										<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-04.png" alt="Image 3" class="iconcc"></td>
-										<td>scared</td>
-										<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-12.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-07.png" alt="Image 3" class="iconcc"></td>
-										<td>tired</td>
-										<td><img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-08.png" alt="Image 3" class="iconcc"></td>
-										<td>angry</td>
-										<td><img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-46.png" alt="Image 18" class="iconcc"> <img src="CC/CC-43.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-									<tr>
-										<td style="text-align: center;"><img src="images/icons/icons-03.png" alt="Image 3" class="iconcc"></td>
-										<td>bored</td>
-										<td><img src="CC/CC-41.png" alt="Image 18" class="iconcc"> <img src="CC/CC-14.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
-									</tr>
-								</table>
-								<br>
-								<p style="text-indent: -15px; margin-left: 15px;">2.</p><br>
-								<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will practice with vocabulary for emotions. </p>
-								<p style="text-indent: -15px; margin-left: 35px;">b. Spin the wheel.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">c. Model the following conversation aloud:</p>
-								<br><h3>Example</h3>
-								<img src="images/11.jpg" alt="Image 3" class="example-image">
-								<p style="text-indent: -15px; margin-left: 35px;">d. Choose a student and spin the wheel.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">e. Have the student tell you the description.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">f. Ask the student: How are you?</p>
-								<p style="text-indent: -15px; margin-left: 35px;">g. Have the student respond using the emotion shown on the wheel, and encourage them to act out the appropriate gesture.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">h. Ask the rest of the class to act out the same gesture together.</p>
-								<p style="text-indent: -15px; margin-left: 35px;">i. Continue in the same fashion with the rest of the students.</p><br>
-								<table>
-									<tr>
-										<td>
-											<img src="images/practice/1_nervous.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/2_excited.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/3_happy.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/4_angry.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/5_sad.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<img src="images/practice/6_scared.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/7_happy.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/8_tired.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/9_angry.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-										<td>
-											<img src="images/practice/10_bored.jpg" style="max-width: 200px" alt="Image 3" class="example-image">
-										</td>
-									</tr>
-								</table>
-							</div>
-						</div>
+						<!-- Acordeón para la sección de Vocabulary and expressions -->
+						<p>Have students role-play different situations where they have to express different emotions in various settings. You may provide background images to make the activity feel more realistic and engaging.</p><br>
+						<p>Two friends are:</p><br>
+						<ul>
+						  <li style="margin-left: 35px;">At the airport ready to fly.</li>
+						  <li style="margin-left: 35px;">At an amusement park ready to take a roller coaster ride.</li>
+						  <li style="margin-left: 35px;">At school/in the office ready for their first day.</li>
+						  <li style="margin-left: 35px;">At school ready for a field trip.</li>
+						  <li style="margin-left: 35px;">In the office ready for a job interview.</li>
+						</ul>
+						<!-- Acordeón para la sección de Example -->
+						<br><h3>Example</h3>
+						<img src="images/10.jpg" alt="Image 3" class="example-image">
+					</div>
+                </div>
+				<!-- Practice -->
+                <div class="content">
+                    <h2>Practice</h2><br>
+					<!-- Acordeón para la sección de Dialogue -->
+					<div class="accordion2">
+						<p>This activity will be divided into two parts. First the students will learn vocabulary regarding emotions and then they will practice the emotions in a fun and interactive way.</p><br>
+						<p style="text-indent: -15px; margin-left: 15px;">1.</p><br>
+						<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will learn and practice vocabulary for emotions.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">b. Go over the first section of the Practice and show the first emoji on the screen.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">c. Have a student follow the color chart guide and pronounce the word. Follow the correction process.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">d. Demonstrate the emotion and help your students with any doubt they may have.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">e. Continue in the same fashion with the rest of the emotions.</p><br>
+						<table class="tabla-emotions" style="margin: 0 auto; text-align: center; max-width: 560px;">
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-01.png" alt="Image 3" class="iconcc"></td>
+								<td>nervous</td>
+								<td><img src="CC/CC-30.png" alt="Image 18" class="iconcc"> <img src="CC/CC-07.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-32.png" alt="Image 18" class="iconcc"> <img src="CC/CC-06.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-02.png" alt="Image 3" class="iconcc"></td>
+								<td>excited</td>
+								<td><img src="CC/CC-03.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-54.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-06.png" alt="Image 3" class="iconcc"></td>
+								<td>happy</td>
+								<td><img src="CC/CC-42.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-24.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-05.png" alt="Image 3" class="iconcc"></td>
+								<td>sad</td>
+								<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-04.png" alt="Image 3" class="iconcc"></td>
+								<td>scared</td>
+								<td><img src="CC/CC-27.png" alt="Image 18" class="iconcc"> <img src="CC/CC-39.png" alt="Image 18" class="iconcc"> <img src="CC/CC-12.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-07.png" alt="Image 3" class="iconcc"></td>
+								<td>tired</td>
+								<td><img src="CC/CC-25.png" alt="Image 18" class="iconcc"> <img src="CC/CC-15.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-08.png" alt="Image 3" class="iconcc"></td>
+								<td>angry</td>
+								<td><img src="CC/CC-01.png" alt="Image 18" class="iconcc"> <img src="CC/CC-46.png" alt="Image 18" class="iconcc"> <img src="CC/CC-43.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-11.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+							<tr>
+								<td style="text-align: center;"><img src="images/icons/icons-03.png" alt="Image 3" class="iconcc"></td>
+								<td>bored</td>
+								<td><img src="CC/CC-41.png" alt="Image 18" class="iconcc"> <img src="CC/CC-14.png" alt="Image 18" class="iconcc"> <img src="CC/CC-40.png" alt="Image 18" class="iconcc"> <img src="CC/CC-33.png" alt="Image 18" class="iconcc"></td>
+							</tr>
+						</table>
+						<br>
+						<p style="text-indent: -15px; margin-left: 15px;">2.</p><br>
+						<p style="text-indent: -15px; margin-left: 35px;">a. Explain to your students that they will practice with vocabulary for emotions. </p>
+						<p style="text-indent: -15px; margin-left: 35px;">b. Spin the wheel.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">c. Model the following conversation aloud:</p>
+						<br><h3>Example</h3>
+						<img src="images/11.jpg" alt="Image 3" class="example-image">
+						<p style="text-indent: -15px; margin-left: 35px;">d. Choose a student and spin the wheel.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">e. Have the student tell you the description.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">f. Ask the student: How are you?</p>
+						<p style="text-indent: -15px; margin-left: 35px;">g. Have the student respond using the emotion shown on the wheel, and encourage them to act out the appropriate gesture.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">h. Ask the rest of the class to act out the same gesture together.</p>
+						<p style="text-indent: -15px; margin-left: 35px;">i. Continue in the same fashion with the rest of the students.</p><br>
+						<table>
+							<tr>
+								<td>
+									<img src="images/practice/1_nervous.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/2_excited.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/3_happy.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/4_angry.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/5_sad.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="images/practice/6_scared.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/7_happy.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/8_tired.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/9_angry.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+								<td>
+									<img src="images/practice/10_bored.jpg" style="max-width: 100px" alt="Image 3" class="example-image">
+								</td>
+							</tr>
+						</table>
 						
-
-
 						
 					</div>
                 </div>
@@ -1112,132 +1110,136 @@
         </div>
     </div>
 	<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Función para manejar el cambio de pestañas
-    function handleTabChange(event) {
-        const selectedRadio = event.target; // Pestaña seleccionada
-        const navIndicator = document.querySelector('nav::before'); // Indicador de navegación
-        
-        // Ajustar la posición de la barra de navegación según la pestaña seleccionada
-        if (selectedRadio.id === 'steps') {
-            navIndicator.style.left = '0';
-        } else if (selectedRadio.id === 'seg1') {
-            navIndicator.style.left = '20%';
-        } else if (selectedRadio.id === 'seg2') {
-            navIndicator.style.left = '40%';
-        } else if (selectedRadio.id === 'seg3') {
-            navIndicator.style.left = '60%';
-        } else if (selectedRadio.id === 'ext') {
-            navIndicator.style.left = '80%';
-        }
-        
-        // Actualizar la posición de contenido
-        const contentBox = document.querySelector('.content-box');
-        if (selectedRadio.id === 'steps') {
-            contentBox.style.left = '0';
-        } else if (selectedRadio.id === 'seg1') {
-            contentBox.style.left = '-100%';
-        } else if (selectedRadio.id === 'seg2') {
-            contentBox.style.left = '-200%';
-        } else if (selectedRadio.id === 'seg3') {
-            contentBox.style.left = '-300%';
-        } else if (selectedRadio.id === 'ext') {
-            contentBox.style.left = '-400%';
-        }
-    }
+	document.addEventListener('DOMContentLoaded', function () {
+		// Función para manejar el cambio de pestañas
+		function handleTabChange(event) {
+			const selectedRadio = event.target; // Pestaña seleccionada
+			const navIndicator = document.querySelector('nav::before'); // Indicador de navegación
 
-    // Manejar el cambio de pestañas
-    const radioButtons = document.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(radio => {
-        radio.addEventListener('change', handleTabChange);
-    });
+			// Ajustar la posición de la barra de navegación según la pestaña seleccionada
+			if (selectedRadio.id === 'steps') {
+				navIndicator.style.left = '0';
+			} else if (selectedRadio.id === 'seg1') {
+				navIndicator.style.left = '20%';
+			} else if (selectedRadio.id === 'seg2') {
+				navIndicator.style.left = '40%';
+			} else if (selectedRadio.id === 'seg3') {
+				navIndicator.style.left = '60%';
+			} else if (selectedRadio.id === 'seg4') {
+				navIndicator.style.left = '70%';
+			} else if (selectedRadio.id === 'ext') {
+				navIndicator.style.left = '80%';
+			}
 
-// Manejo de acordeón
-function adjustContainerHeight() {
-    const container = document.querySelector('.container');
-    
-    // Obtener la altura de la ventana (viewport)
-    const viewportHeight = window.innerHeight; 
-    
-    // Ajustar la altura mínima basada en el tamaño del viewport
-    let totalHeight;
+			// Actualizar la posición de contenido
+			const contentBox = document.querySelector('.content-box');
+			if (selectedRadio.id === 'steps') {
+				contentBox.style.left = '0';
+			} else if (selectedRadio.id === 'seg1') {
+				contentBox.style.left = '-100%';
+			} else if (selectedRadio.id === 'seg2') {
+				contentBox.style.left = '-200%';
+			} else if (selectedRadio.id === 'seg3') {
+				contentBox.style.left = '-300%';
+			} else if (selectedRadio.id === 'seg4') {
+				contentBox.style.left = '-400%';
+			} else if (selectedRadio.id === 'ext') {
+				contentBox.style.left = '-500%';
+			}
+		}
 
-    // Definir diferentes alturas según el ancho de la pantalla
-    if (window.innerWidth < 600) {
-        // Para pantallas pequeñas (móviles), ajustar más
-        totalHeight = viewportHeight * 1.9; // Por ejemplo, 120% del viewport para móviles
-    } else if (window.innerWidth < 1024) {
-        // Para pantallas medianas (tablets)
-        totalHeight = viewportHeight * 1.6; // 150% del viewport
-    } else {
-        // Para pantallas grandes (desktops)
-        totalHeight = viewportHeight * 1.3; // 190% del viewport
-    }
-    
-    // Añadir altura de acordeones abiertos
-    const openAccordions = document.querySelectorAll('.accordion-content2[style*="display: block"]');
-    openAccordions.forEach(accordion => {
-        totalHeight += accordion.scrollHeight; // Añadir altura dinámica en píxeles
-    });
+		// Manejar el cambio de pestañas
+		const radioButtons = document.querySelectorAll('input[type="radio"]');
+		radioButtons.forEach(radio => {
+			radio.addEventListener('change', handleTabChange);
+		});
 
-    // Ajustar el min-height del contenedor dinámicamente
-    container.style.minHeight = `${totalHeight}px`;
-}
+	// Manejo de acordeón
+	function adjustContainerHeight() {
+		const container = document.querySelector('.container');
 
-// Escuchar cambios en el tamaño de la ventana para hacerlo responsivo
-window.addEventListener('resize', adjustContainerHeight);
+		// Obtener la altura de la ventana (viewport)
+		const viewportHeight = window.innerHeight; 
 
-// Ejecutar al cargar la página
-adjustContainerHeight();
+		// Ajustar la altura mínima basada en el tamaño del viewport
+		let totalHeight;
+
+		// Definir diferentes alturas según el ancho de la pantalla
+		if (window.innerWidth < 600) {
+			// Para pantallas pequeñas (móviles), ajustar más
+			totalHeight = viewportHeight * 1.9; // Por ejemplo, 120% del viewport para móviles
+		} else if (window.innerWidth < 1024) {
+			// Para pantallas medianas (tablets)
+			totalHeight = viewportHeight * 2.2; // 150% del viewport
+		} else {
+			// Para pantallas grandes (desktops)
+			totalHeight = viewportHeight * 2.3; // 190% del viewport
+		}
+
+		// Añadir altura de acordeones abiertos
+		const openAccordions = document.querySelectorAll('.accordion-content2[style*="display: block"]');
+		openAccordions.forEach(accordion => {
+			totalHeight += accordion.scrollHeight; // Añadir altura dinámica en píxeles
+		});
+
+		// Ajustar el min-height del contenedor dinámicamente
+		container.style.minHeight = `${totalHeight}px`;
+	}
+
+	// Escuchar cambios en el tamaño de la ventana para hacerlo responsivo
+	window.addEventListener('resize', adjustContainerHeight);
+
+	// Ejecutar al cargar la página
+	adjustContainerHeight();
 
 
 
-// Manejo del acordeón en la lista (solo un acordeón abierto a la vez)
-const accordionItems = document.querySelectorAll('.accordion-text li');
-accordionItems.forEach(item => {
-    item.addEventListener('click', function () {
-        const isOpen = this.classList.contains('showAnswer'); // Verifica si ya está abierto
-        
-        // Cerrar todos los acordeones
-        accordionItems.forEach(i => i.classList.remove('showAnswer'));
-        
-        // Si el acordeón no estaba abierto, abrirlo
-        if (!isOpen) {
-            this.classList.add('showAnswer');
-        }
-    });
-});
+	// Manejo del acordeón en la lista (solo un acordeón abierto a la vez)
+	const accordionItems = document.querySelectorAll('.accordion-text li');
+	accordionItems.forEach(item => {
+		item.addEventListener('click', function () {
+			const isOpen = this.classList.contains('showAnswer'); // Verifica si ya está abierto
 
-    // Manejo del acordeón en los elementos
-    const accordionItems2 = document.querySelectorAll('.accordion-item2');
-    accordionItems2.forEach(item => {
-        const header = item.querySelector('.accordion-header2');
-        header.addEventListener('click', function () {
-            const content = item.querySelector('.accordion-content2');
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-            header.classList.toggle('active2');
-            
-            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
-            adjustContainerHeight();
-        });
-    });
-	// Manejo del acordeón en los elementos
-    const accordionItems3 = document.querySelectorAll('.accordion-item');
-    accordionItems3.forEach(item => {
-        const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', function () {
-            const content = item.querySelector('.accordion-content');
-            content.style.display = content.style.display === 'block' ? 'none' : 'block';
-            header.classList.toggle('active');
-            
-            // Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
-            adjustContainerHeight();
-        });
-    });
+			// Cerrar todos los acordeones
+			accordionItems.forEach(i => i.classList.remove('showAnswer'));
 
-    // Inicializar altura del contenedor al cargar
-    adjustContainerHeight();
-});
-</script>
-</body>
+			// Si el acordeón no estaba abierto, abrirlo
+			if (!isOpen) {
+				this.classList.add('showAnswer');
+			}
+		});
+	});
+
+		// Manejo del acordeón en los elementos
+		const accordionItems2 = document.querySelectorAll('.accordion-item2');
+		accordionItems2.forEach(item => {
+			const header = item.querySelector('.accordion-header2');
+			header.addEventListener('click', function () {
+				const content = item.querySelector('.accordion-content2');
+				content.style.display = content.style.display === 'block' ? 'none' : 'block';
+				header.classList.toggle('active2');
+
+				// Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+				adjustContainerHeight();
+			});
+		});
+		// Manejo del acordeón en los elementos
+		const accordionItems3 = document.querySelectorAll('.accordion-item');
+		accordionItems3.forEach(item => {
+			const header = item.querySelector('.accordion-header');
+			header.addEventListener('click', function () {
+				const content = item.querySelector('.accordion-content');
+				content.style.display = content.style.display === 'block' ? 'none' : 'block';
+				header.classList.toggle('active');
+
+				// Ajustar la altura del contenedor cada vez que se abre/cierra un acordeón
+				adjustContainerHeight();
+			});
+		});
+
+		// Inicializar altura del contenedor al cargar
+		adjustContainerHeight();
+	});
+	</script>
+	</body>
 </html>
